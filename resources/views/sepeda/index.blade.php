@@ -11,15 +11,17 @@
                 <th>Merk</th>
                 <th>Sewa</th>
                 <th>Jumlah</th>
+                <th>Foto</th>
                 <th>Aksi</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody></tbody>
             @foreach ($sepedas as $sepeda)
             <tr>
                 <td>{{ $sepeda->merk }}</td>
                 <td>{{ $sepeda->sewa }}</td>
                 <td>{{ $sepeda->jumlah }}</td>
+                <td class="text-center"><img src="{{ asset('storage/' .$sepeda->foto) }}" alt="" style="width: 100px; height: auto;"></td>
                 <td>
                     <a href="{{ route('sepeda.edit', $sepeda->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <form action="{{ route('sepeda.destroy', $sepeda->id) }}" method="POST" class="d-inline">
