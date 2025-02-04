@@ -19,7 +19,7 @@
         <tr>
             <td>{{ $p->nama }}</td>
             <td>{{ $p->alamat }}</td>
-            <td class="text-center"><img src="{{ asset('storage/' .$p->foto) }}" alt="" style="width: 100px; height: auto;"></td>>
+            <td class="text-center"><img src="{{ asset('storage/' .$p->foto) }}" alt="" style="width: 100px; height: auto;"></td>
             <td>
                 <a href="{{ route('peminjam.edit', $p->id) }}" class="btn btn-warning btn-sm">Edit</a>
                 <form action="{{ route('peminjam.destroy', $p->id) }}" method="POST" class="d-inline">
