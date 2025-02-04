@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('bayar');
             $table->integer('denda')->nullable();
             $table->string('jaminan');
-            $table->enum('status', ['dipinjam', 'dikembalikan'])->default('dipinjam');
+            $table->string('status');
             $table->timestamps();
         });
     }
