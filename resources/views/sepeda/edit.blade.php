@@ -20,7 +20,7 @@
 
         <div class="mb-3">
             <label for="jumlah" class="form-label">Jumlah</label>
-            <input type="number" class="form-control" id="jumlah" name="jumlah" value="{{ old('sewa', $sepeda->sewa) }}" required>
+            <input type="number" class="form-control" id="jumlah" name="jumlah" value="{{ old('jumlah', $sepeda->jumlah) }}" required>
         </div>
 
         <div class="mb-3">
