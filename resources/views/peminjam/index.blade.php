@@ -1,7 +1,7 @@
-@extends('layouts.layout')  <!-- Memanggil layout dari folder layouts -->
+@extends('layouts.layout') 
 
 @section('content')
-<!-- Konten dari halaman ini -->
+
 <h2 class="mb-4">Daftar Peminjam</h2>
 <a href="{{ route('peminjam.create') }}" class="btn btn-primary mb-3">Tambah Peminjam</a>
 

@@ -21,7 +21,7 @@
             <label for="sepeda_id" class="form-label">Sepeda</label>
             <select class="form-control" id="sepeda_id" name="sepeda_id" required>
                 @foreach ($sepedas as $sepeda)
-                    <option value="{{ $sepeda->id }}" {{ $sepeda->id == $transaksi->id_sepeda ? 'selected' : '' }}>{{ $sepeda->merk }}</option>
+                    <option value="{{ $sepeda->id }}" data-sewa="{{ $sepeda->sewa }}" {{ $sepeda->id == $transaksi->id_sepeda ? 'selected' : '' }}>{{ $sepeda->merk }}</option>
                 @endforeach
             </select>
         </div>
@@ -38,7 +38,7 @@
 
         <div class="mb-3">
             <label for="bayar" class="form-label">Bayar</label>
-            <input type="number" class="form-control" id="bayar" name="bayar" value="{{ $transaksi->bayar }}" required>
+            <input type="number" class="form-control" id="bayar" name="bayar" value="{{ $transaksi->bayar }}" readonly required>
         </div>
 
         <div class="mb-3">
@@ -62,4 +62,24 @@
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
+
+<script>
+    document.getElementById('sepeda_id').addEventListener('change', calculateBayar);
+    document.getElementById('tgl_pinjam').addEventListener('change', calculateBayar);
+    document.getElementById('tgl_pulang').addEventListener('change', calculateBayar);
+
+    function calculateBayar() {
+        var sewa = document.getElementById('sepeda_id').selectedOptions[0].getAttribute('data-sewa');
+        var tglPinjam = document.getElementById('tgl_pinjam').value;
+        var tglPulang = document.getElementById('tgl_pulang').value;
+
+        if(tglPinjam && tglPulang && sewa) {
+            var diff = Math.abs(new Date(tglPulang) - new Date(tglPinjam));
+            var diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+
+            var totalBayar = diffDays * sewa;
+            document.getElementById('bayar').value = totalBayar;
+        }
+    }
+</script>
 @endsection
