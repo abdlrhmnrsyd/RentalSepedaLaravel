@@ -2,23 +2,23 @@
 
 @section('content')
 <div class="container mx-auto p-8">
-    <h2 class="text-2xl font-semibold mb-6">Tambah Transaksi</h2>
+    <h2 class="text-3xl font-bold mb-6 text-center">Tambah Transaksi</h2>
 
-    <form action="{{ route('transaksi.store') }}" method="POST" class="space-y-4">
+    <form action="{{ route('transaksi.store') }}" method="POST" class="space-y-6 bg-white p-6 rounded-lg shadow-md">
         @csrf
 
-        <div class="mb-3">
-            <label for="peminjam_id" class="form-label">Peminjam</label>
-            <select class="form-control" id="peminjam_id" name="peminjam_id" required>
+        <div class="mb-4">
+            <label for="peminjam_id" class="block text-sm font-medium text-gray-700">Peminjam</label>
+            <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50" id="peminjam_id" name="peminjam_id" required>
                 @foreach ($peminjams as $peminjam)
                     <option value="{{ $peminjam->id }}">{{ $peminjam->nama }}</option>
                 @endforeach
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="sepeda_id" class="form-label">Sepeda</label>
-            <select class="form-control" id="sepeda_id" name="sepeda_id" required>
+        <div class="mb-4">
+            <label for="sepeda_id" class="block text-sm font-medium text-gray-700">Sepeda</label>
+            <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50" id="sepeda_id" name="sepeda_id" required>
                 @foreach ($sepedas as $sepeda)
                     <option value="{{ $sepeda->id }}" data-sewa="{{ $sepeda->sewa }}" data-gambar="{{ asset($sepeda->gambar) }}">{{ $sepeda->merk }}</option>
                 @endforeach
@@ -26,44 +26,58 @@
         </div>
 
         <!-- Gambar Sepeda -->
-        <div class="mb-3">
-            <img id="gambar_sepeda" src="" alt="Gambar Sepeda" style="display:none; max-width: 200px;" />
+        <div class="mb-4">
+            <img id="gambar_sepeda" src="" alt="Gambar Sepeda" class="hidden max-w-xs mx-auto" />
         </div>
 
-        <div class="mb-3">
-            <label for="tgl_pinjam" class="form-label">Tanggal Pinjam</label>
-            <input type="date" class="form-control" id="tgl_pinjam" name="tgl_pinjam" required>
+        <div class="mb-4">
+            <label for="tgl_pinjam" class="block text-sm font-medium text-gray-700">Tanggal Pinjam</label>
+            <input type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50" id="tgl_pinjam" name="tgl_pinjam" required>
         </div>
 
-        <div class="mb-3">
-            <label for="tgl_pulang" class="form-label">Tanggal Pulang</label>
-            <input type="date" class="form-control" id="tgl_pulang" name="tgl_pulang" required>
+        <div class="mb-4">
+            <label for="tgl_pulang" class="block text-sm font-medium text-gray-700">Tanggal Pulang</label>
+            <input type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50" id="tgl_pulang" name="tgl_pulang" required>
         </div>
 
-        <div class="mb-3">
-            <label for="bayar" class="form-label">Bayar</label>
-            <input type="number" class="form-control" id="bayar" name="bayar" readonly required>
+        <div class="mb-4">
+            <label for="bayar" class="block text-sm font-medium text-gray-700">Bayar</label>
+            <input type="number" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50" id="bayar" name="bayar" readonly required>
         </div>
 
-        <div class="mb-3">
-            <label for="denda" class="form-label">Denda</label>
-            <input type="number" class="form-control" id="denda" name="denda">
+        <div class="mb-4">
+            <label for="denda" class="block text-sm font-medium text-gray-700">Denda</label>
+            <input type="number" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50" id="denda" name="denda">
         </div>
 
-        <div class="mb-3">
-            <label for="jaminan" class="form-label">Jaminan</label>
-            <input type="text" class="form-control" id="jaminan" name="jaminan" required>
+        <div class="mb-4">
+            <label for="jaminan" class="block text-sm font-medium text-gray-700">Jaminan</label>
+            <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50" id="jaminan" name="jaminan" required>
         </div>
 
-        <div class="mb-3">
-            <label for="status" class="form-label">Status</label>
-            <select class="form-control" id="status" name="status" required>
+        <div class="mb-4">
+            <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+            <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50" id="status" name="status" required>
                 <option value="Pinjam">Pinjam</option>
                 <option value="Kembali">Kembali</option>
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Simpan</button>
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Peminjam</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sepeda</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Pinjam</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Pulang</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                <!-- Data tabel akan diisi di sini -->
+            </tbody>
+        </table>
+
+        <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 rounded hover:bg-blue-600">Simpan</button>
     </form>
 </div>
 

@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rental Sepeda Pantai</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/">Rental Sepeda</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('peminjam.index') }}">Peminjam</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('sepeda.index') }}">Sepeda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('transaksi.index') }}">Transaksi</a></li>
-                </ul>
+<body class="bg-gray-100">
+    <nav class="bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a class="text-white text-lg font-bold" href="/">Rental Sepeda</a>
+                <div class="hidden md:flex space-x-4">
+                    <a class="text-gray-300 hover:text-white" href="{{ route('peminjam.index') }}">Peminjam</a>
+                    <a class="text-gray-300 hover:text-white" href="{{ route('sepeda.index') }}">Sepeda</a>
+                    <a class="text-gray-300 hover:text-white" href="{{ route('transaksi.index') }}">Transaksi</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container mx-auto mt-4">
         @yield('content')
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
 </body>
 </html>

@@ -1,65 +1,65 @@
 @extends('layouts.layout')
 
 @section('content')
-<div class="container">
-    <h2 class="mb-4">Edit Transaksi</h2>
+<div class="container mx-auto p-4">
+    <h2 class="text-2xl font-bold mb-4">Edit Transaksi</h2>
 
     <form action="{{ route('transaksi.update', $transaksi->id) }}" method="POST">
         @csrf
         @method('PUT')
 
-        <div class="mb-3">
-            <label for="peminjam_id" class="form-label">Peminjam</label>
-            <select class="form-control" id="peminjam_id" name="peminjam_id" required>
+        <div class="mb-4">
+            <label for="peminjam_id" class="block text-sm font-medium text-gray-700">Peminjam</label>
+            <select class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="peminjam_id" name="peminjam_id" required>
                 @foreach ($peminjams as $peminjam)
                     <option value="{{ $peminjam->id }}" {{ $peminjam->id == $transaksi->id_peminjam ? 'selected' : '' }}>{{ $peminjam->nama }}</option>
                 @endforeach
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="sepeda_id" class="form-label">Sepeda</label>
-            <select class="form-control" id="sepeda_id" name="sepeda_id" required>
+        <div class="mb-4">
+            <label for="sepeda_id" class="block text-sm font-medium text-gray-700">Sepeda</label>
+            <select class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="sepeda_id" name="sepeda_id" required>
                 @foreach ($sepedas as $sepeda)
                     <option value="{{ $sepeda->id }}" data-sewa="{{ $sepeda->sewa }}" {{ $sepeda->id == $transaksi->id_sepeda ? 'selected' : '' }}>{{ $sepeda->merk }}</option>
                 @endforeach
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="tgl_pinjam" class="form-label">Tanggal Pinjam</label>
-            <input type="date" class="form-control" id="tgl_pinjam" name="tgl_pinjam" value="{{ $transaksi->tgl_pinjam }}" required>
+        <div class="mb-4">
+            <label for="tgl_pinjam" class="block text-sm font-medium text-gray-700">Tanggal Pinjam</label>
+            <input type="date" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="tgl_pinjam" name="tgl_pinjam" value="{{ $transaksi->tgl_pinjam }}" required>
         </div>
 
-        <div class="mb-3">
-            <label for="tgl_pulang" class="form-label">Tanggal Pulang</label>
-            <input type="date" class="form-control" id="tgl_pulang" name="tgl_pulang" value="{{ $transaksi->tgl_pulang }}" required>
+        <div class="mb-4">
+            <label for="tgl_pulang" class="block text-sm font-medium text-gray-700">Tanggal Pulang</label>
+            <input type="date" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="tgl_pulang" name="tgl_pulang" value="{{ $transaksi->tgl_pulang }}" required>
         </div>
 
-        <div class="mb-3">
-            <label for="bayar" class="form-label">Bayar</label>
-            <input type="number" class="form-control" id="bayar" name="bayar" value="{{ $transaksi->bayar }}" readonly required>
+        <div class="mb-4">
+            <label for="bayar" class="block text-sm font-medium text-gray-700">Bayar</label>
+            <input type="number" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="bayar" name="bayar" value="{{ $transaksi->bayar }}" readonly required>
         </div>
 
-        <div class="mb-3">
-            <label for="denda" class="form-label">Denda</label>
-            <input type="number" class="form-control" id="denda" name="denda" value="{{ $transaksi->denda }}" required>
+        <div class="mb-4">
+            <label for="denda" class="block text-sm font-medium text-gray-700">Denda</label>
+            <input type="number" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="denda" name="denda" value="{{ $transaksi->denda }}" required>
         </div>
 
-        <div class="mb-3">
-            <label for="jaminan" class="form-label">Jaminan</label>
-            <input type="text" class="form-control" id="jaminan" name="jaminan" value="{{ $transaksi->jaminan }}" required>
+        <div class="mb-4">
+            <label for="jaminan" class="block text-sm font-medium text-gray-700">Jaminan</label>
+            <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="jaminan" name="jaminan" value="{{ $transaksi->jaminan }}" required>
         </div>
 
-        <div class="mb-3">
-            <label for="status" class="form-label">Status</label>
-            <select class="form-control" id="status" name="status" required>
+        <div class="mb-4">
+            <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+            <select class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="status" name="status" required>
                 <option value="Pinjam" {{ $transaksi->status == 'Pinjam' ? 'selected' : '' }}>Pinjam</option>
                 <option value="Kembali" {{ $transaksi->status == 'Kembali' ? 'selected' : '' }}>Kembali</option>
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded">Update</button>
     </form>
 </div>
 

@@ -15,7 +15,8 @@ class SepedaController extends Controller
 
     public function create()
     {
-        return view('sepeda.create');
+        $sepedas = Sepeda::all();
+        return view('sepeda.create',compact('sepedas'));
     }
 
     public function store(Request $request)

@@ -1,33 +1,33 @@
 @extends('layouts.layout')
 
 @section('content')
-<div class="container">
-    <h2 class="mb-4">Tambah Sepeda</h2>
+<div class="container mx-auto p-6">
+    <h2 class="text-3xl font-bold mb-6">Tambah Sepeda</h2>
 
-    <form action="{{ route('sepeda.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('sepeda.store') }}" method="POST" enctype="multipart/form-data" class="bg-white shadow-lg rounded-lg p-8">
         @csrf
 
-        <div class="mb-3">
-            <label for="merk" class="form-label">Merk</label>
-            <input type="text" class="form-control" id="merk" name="merk" required>
+        <div class="mb-4">
+            <label for="merk" class="block text-gray-700 text-sm font-medium mb-2">Merk</label>
+            <input type="text" class="border border-gray-300 rounded-lg w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500" id="merk" name="merk" required>
         </div>
 
-        <div class="mb-3">
-            <label for="sewa" class="form-label">Harga Sewa</label>
-            <input type="number" class="form-control" id="sewa" name="sewa" required>
+        <div class="mb-4">
+            <label for="sewa" class="block text-gray-700 text-sm font-medium mb-2">Harga Sewa</label>
+            <input type="number" class="border border-gray-300 rounded-lg w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500" id="sewa" name="sewa" required>
         </div>
 
-        <div class="mb-3">
-            <label for="jumlah" class="form-label">Jumlah</label>
-            <input type="number" class="form-control" id="jumlah" name="jumlah" required>
+        <div class="mb-4">
+            <label for="jumlah" class="block text-gray-700 text-sm font-medium mb-2">Jumlah</label>
+            <input type="number" class="border border-gray-300 rounded-lg w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500" id="jumlah" name="jumlah" required>
         </div>
 
-        <div class="mb-3">
-            <label for="foto" class="form-label">Foto</label>
-            <input type="file" class="form-control" id="foto" name="foto" accept="image/*">
+        <div class="mb-4">
+            <label for="foto" class="block text-gray-700 text-sm font-medium mb-2">Foto</label>
+            <input type="file" class="border border-gray-300 rounded-lg w-full py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500" id="foto" name="foto" accept="image/*">
         </div>
 
-        <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Simpan</button>
     </form>
 </div>
 @endsection
