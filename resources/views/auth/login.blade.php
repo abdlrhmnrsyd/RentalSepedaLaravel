@@ -29,7 +29,7 @@
         <div class="text-center mb-8">
             <i class="fas fa-bicycle text-5xl text-blue-600 mb-4"></i>
             <h2 class="text-3xl font-bold text-gray-800">Selamat Datang</h2>
-            <p class="text-gray-600 mt-2">di Rental Sepeda Pantai</p>
+            <p class="text-gray-600 mt-2">di Rental Sepeda</p>
         </div>
         
         <form action="{{ route('login') }}" method="POST" class="space-y-6">
@@ -37,7 +37,7 @@
             
             <div class="space-y-2">
                 <label for="login" class="block text-sm font-medium text-gray-700">
-                    <i class="fas fa-user mr-2"></i>Name/Email
+                    <i class="fas fa-user mr-2"></i>Name or Email
                 </label>
                 <input type="text" 
                        id="login" 

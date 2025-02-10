@@ -44,7 +44,7 @@
                         <a class="text-white text-xl font-bold tracking-wider hover:text-pink-200 transition duration-300" href="/">
                             <span class="text-pink-300">Bike</span>Rent
                         </a>
-                        <p class="text-gray-300 text-xs font-medium italic">Sewa Sepeda Pantai Terpercaya</p>
+                        <p class="text-gray-300 text-xs font-medium italic">Sewa Sepeda Terpercaya</p>
                     </div>
                 </div>
                 
