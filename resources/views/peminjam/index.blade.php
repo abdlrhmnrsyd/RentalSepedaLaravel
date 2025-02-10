@@ -1,8 +1,6 @@
 @extends('layouts.layout') 
 
 @section('content')
-
-<h2 class="text-2xl font-bold mb-4">Daftar Peminjam</h2>
 <a href="{{ route('peminjam.create') }}" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded mb-3 inline-block">Tambah Peminjam</a>
 
 <div class="overflow-x-auto">
