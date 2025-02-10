@@ -54,7 +54,7 @@ class TransaksiController extends Controller
             'tgl_pinjam' => $request->tgl_pinjam,
             'tgl_pulang' => $request->tgl_pulang,
             'bayar' => $bayar,
-            'denda' => $request->denda ?? 0,  // Default jika denda tidak diisi
+            'denda' => $request->denda ?? 0,  
             'jaminan' => $request->jaminan,
             'status' => $request->status,
         ]);
