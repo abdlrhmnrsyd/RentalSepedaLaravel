@@ -70,6 +70,16 @@
                         </div>
                         <span class="font-medium text-sm">Transaksi</span>
                     </a>
+                    <form action="{{ route('logout')}}" method="POST" class="inline">
+                        @csrf
+                        @method('POST')
+                        <button type="submit" class="nav-link-hover text-white hover:text-pink-200 transition duration-300 flex items-center space-x-2 px-3 py-1">
+                            <div class="glass-effect p-1.5 rounded-lg">
+                                <i class="fas fa-sign-out-alt text-sm"></i>
+                            </div>
+                            <span class="font-medium text-sm">Logout</span>
+                        </button>
+                    </form>
                 </div>
 
                 <div class="lg:hidden">
@@ -108,6 +118,16 @@
                         </div>
                         <span class="text-sm">Transaksi</span>
                     </a>
+                    <form action="{{ route('logout')}}" method="POST">
+                        @csrf 
+                        @method('POST')
+                        <button type="submit" class="w-full text-left text-white hover:bg-white/10 px-3 py-2 rounded-lg transition duration-300 flex items-center space-x-2">
+                            <div class="glass-effect p-1.5 rounded-lg">
+                                <i class="fas fa-sign-out-alt text-sm"></i>
+                            </div>
+                            <span class="text-sm">Logout</span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
