@@ -7,6 +7,7 @@ use App\Models\Transaksi;
 use App\Models\Peminjam;
 use App\Models\Sepeda;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TransaksiController extends Controller
 {
@@ -113,5 +114,14 @@ class TransaksiController extends Controller
     {
         $transaksi->delete();
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil dihapus.');
+    }
+
+    public function show($id) {
+        try {
+            $transaksi = Transaksi::with('peminjam', 'sepeda')->where('id', $id)->firstOrFail();
+            return view('transaksi.show', compact('transaksi',));
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('transaksi.index')->with('error', 'Transaksi tidak ditemukan.');
+        }
     }
 }

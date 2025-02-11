@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('peminjam', PeminjamController::class);
     Route::resource('sepeda', SepedaController::class);
     Route::resource('transaksi', TransaksiController::class);
+    Route::get('transaksi/{id}', [TransaksiController::class, 'show'])->name('transaksi.show');
     Route::get('/', function () {
         return view('welcome');
     });

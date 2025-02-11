@@ -5,7 +5,7 @@
     <a href="{{ route('transaksi.create') }}" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 mb-4 inline-block">Tambah Transaksi</a>
 
     <div class="overflow-x-auto">
-        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md table-auto">
             <thead>
                 <tr class="bg-gray-100 text-gray-600 uppercase text-xs leading-normal">
                     <th class="py-2 px-4 text-left">Peminjam</th>
@@ -33,6 +33,7 @@
                     <td class="py-2 px-4">{{ $transaksi->jaminan }}</td>
                     <td class="py-2 px-4">{{ $transaksi->status }}</td>
                     <td class="py-2 px-4">
+                        <a href="{{ route('transaksi.show', $transaksi->id) }}" class="bg-green-500 text-white font-semibold py-1 px-3 rounded hover:bg-green-600">Detail</a>
                         <a href="{{ route('transaksi.edit', $transaksi->id) }}" class="bg-yellow-500 text-white font-semibold py-1 px-3 rounded hover:bg-yellow-600">Edit</a>
                         <form action="{{ route('transaksi.destroy', $transaksi->id) }}" method="POST" class="inline">
                             @csrf @method('DELETE')
