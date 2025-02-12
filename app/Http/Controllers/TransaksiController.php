@@ -26,29 +26,23 @@ class TransaksiController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
             'peminjam_id' => 'required|exists:peminjams,id',
             'sepeda_id' => 'required|exists:sepedas,id',
             'tgl_pinjam' => 'required|date',
             'tgl_pulang' => 'required|date|after_or_equal:tgl_pinjam',
-            'denda' => 'nullable|integer',
+            'bayar' => 'required|numeric|min:0',
+            'denda' => 'nullable|numeric|min:0',
             'jaminan' => 'required|string',
             'status' => 'required|in:Pinjam,Kembali',
         ]);
 
-        // Ambil data sepeda berdasarkan id yang dipilih
-        $sepeda = Sepeda::find($request->sepeda_id);
-
-        // Hitung total bayar berdasarkan harga sewa sepeda dan jumlah hari sewa
+        $sepeda = Sepeda::find($request->sepeda_id);     
         $tgl_pinjam = Carbon::parse($request->tgl_pinjam);
         $tgl_pulang = Carbon::parse($request->tgl_pulang);
         $durasi_sewa = $tgl_pinjam->diffInDays($tgl_pulang);
-
-        // Total bayar = harga sewa per hari * durasi sewa
         $bayar = $sepeda->sewa * $durasi_sewa;
 
-        // Buat transaksi dengan data yang sudah divalidasi dan bayar otomatis dihitung
         Transaksi::create([
             'peminjam_id' => $request->peminjam_id,
             'sepeda_id' => $request->sepeda_id,

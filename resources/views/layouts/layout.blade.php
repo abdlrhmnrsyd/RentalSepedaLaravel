@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css">
     <style>
         .glass-effect {
             background: rgba(255, 255, 255, 0.1);
@@ -24,13 +26,16 @@
             height: 1px;
             bottom: -2px;
             left: 0;
-            background-color: #fff;
+            background-color: #f3f3f3;
             transition: width 0.3s ease;
         }
         .nav-link-hover:hover::after {
             width: 100%;
         }
     </style>
+   
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
 </head>
 <body class="bg-gray-100">
     <nav class="bg-gradient-to-r from-indigo-900 via-purple-800 to-pink-900 shadow-lg" x-data="{ isOpen: false }">
@@ -138,5 +143,15 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
+    <!-- Tambahkan JavaScript yang diperlukan -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+
+    <script>
+        new DataTable('#example');
+        </script>   
+   
 </body>
 </html>

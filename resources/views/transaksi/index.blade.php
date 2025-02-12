@@ -2,43 +2,59 @@
 
 @section('content')
 <div class="container mx-auto p-6">
-    <a href="{{ route('transaksi.create') }}" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 mb-4 inline-block">Tambah Transaksi</a>
+    <a href="{{ route('transaksi.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5 px-5 rounded-full mb-6 inline-block transition duration-200 shadow-lg hover:shadow-xl">
+        <i class="fas fa-plus mr-2"></i>Tambah Transaksi
+    </a>
 
-    <div class="overflow-x-auto">
-        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md table-auto">
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+        <table class="w-full table-auto" id="example">
             <thead>
-                <tr class="bg-gray-100 text-gray-600 uppercase text-xs leading-normal">
-                    <th class="py-2 px-4 text-left">Peminjam</th>
-                    <th class="py-2 px-4 text-left">Sepeda</th>
-                    <th class="py-2 px-4 text-left">Tanggal Pinjam</th>
-                    <th class="py-2 px-4 text-left">Tanggal Pulang</th>
-                    <th class="py-2 px-4 text-left">Bayar</th>
-                    <th class="py-2 px-4 text-left">Denda</th>
-                    <th class="py-2 px-4 text-left">Total</th>
-                    <th class="py-2 px-4 text-left">Jaminan</th>
-                    <th class="py-2 px-4 text-left">Status</th>
-                    <th class="py-2 px-4 text-left">Aksi</th>
+                <tr class="bg-gray-100 border-b border-gray-200">
+                    <th class="px-6 py-3 text-center text-sm font-bold text-gray-700">No</th>
+                    <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Peminjam</th>
+                    <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Sepeda</th>
+                    <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Tanggal Pinjam</th>
+                    <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Tanggal Pulang</th>
+                    <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Bayar</th>
+                    <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Denda</th>
+                    <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Total</th>
+                    <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Jaminan</th>
+                    <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Status</th>
+                    <th class="px-6 py-3 text-center text-sm font-bold text-gray-700">Aksi</th>
                 </tr>
             </thead>
-            <tbody class="text-gray-600 text-xs font-light">
+            <tbody>
                 @foreach ($transaksis as $transaksi)
-                <tr class="border-b border-gray-200 hover:bg-gray-100">
-                    <td class="py-2 px-4">{{ $transaksi->peminjam->nama }}</td>
-                    <td class="py-2 px-4">{{ $transaksi->sepeda->merk }}</td>
-                    <td class="py-2 px-4">{{ $transaksi->tgl_pinjam }}</td>
-                    <td class="py-2 px-4">{{ $transaksi->tgl_pulang }}</td>
-                    <td class="py-2 px-4">{{ 'Rp ' . number_format($transaksi->bayar, 0, ',', '.') }}</td>
-                    <td class="py-2 px-4">{{ 'Rp ' . number_format($transaksi->denda, 0, ',', '.') }}</td>
-                    <td class="py-2 px-4">{{ 'Rp ' . number_format($transaksi->bayar + $transaksi->denda, 0, ',', '.') }}</td>
-                    <td class="py-2 px-4">{{ $transaksi->jaminan }}</td>
-                    <td class="py-2 px-4">{{ $transaksi->status }}</td>
-                    <td class="py-2 px-4">
-                        <a href="{{ route('transaksi.show', $transaksi->id) }}" class="bg-green-500 text-white font-semibold py-1 px-3 rounded hover:bg-green-600">Detail</a>
-                        <a href="{{ route('transaksi.edit', $transaksi->id) }}" class="bg-yellow-500 text-white font-semibold py-1 px-3 rounded hover:bg-yellow-600">Edit</a>
-                        <form action="{{ route('transaksi.destroy', $transaksi->id) }}" method="POST" class="inline">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="bg-red-500 text-white font-semibold py-1 px-3 rounded hover:bg-red-600">Hapus</button>
-                        </form>
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="px-6 py-4 text-center text-sm">{{ $loop->iteration }}</td>
+                    <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ $transaksi->peminjam->nama }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500">{{ $transaksi->sepeda->merk }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500">{{ $transaksi->tgl_pinjam }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500">{{ $transaksi->tgl_pulang }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500">{{ 'Rp ' . number_format($transaksi->bayar, 0, ',', '.') }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500">{{ 'Rp ' . number_format($transaksi->denda, 0, ',', '.') }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500">{{ 'Rp ' . number_format($transaksi->bayar + $transaksi->denda, 0, ',', '.') }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500">{{ $transaksi->jaminan }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500">{{ $transaksi->status }}</td>
+                    <td class="px-6 py-4">
+                        <div class="flex justify-center space-x-2">
+                            <a href="{{ route('transaksi.show', $transaksi->id) }}" 
+                               class="inline-flex items-center px-3 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-md transition duration-200 shadow hover:shadow-md">
+                                <i class="fas fa-eye mr-2"></i>Detail
+                            </a>
+                            <a href="{{ route('transaksi.edit', $transaksi->id) }}" 
+                               class="inline-flex items-center px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-medium rounded-md transition duration-200 shadow hover:shadow-md">
+                                <i class="fas fa-edit mr-2"></i>Edit
+                            </a>
+                            <form action="{{ route('transaksi.destroy', $transaksi->id) }}" method="POST" class="inline">
+                                @csrf @method('DELETE')
+                                <button type="submit" 
+                                        class="inline-flex items-center px-3 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-md transition duration-200 shadow hover:shadow-md"
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                    <i class="fas fa-trash mr-2"></i>Hapus
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
