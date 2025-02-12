@@ -33,14 +33,16 @@
                            class="inline-flex items-center px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-medium rounded-md transition duration-200 shadow hover:shadow-md">
                             <i class="fas fa-edit mr-2"></i>Edit
                         </a>
-                        <form action="{{ route('peminjam.destroy', $p->id) }}" method="POST" class="inline">
-                            @csrf @method('DELETE')
-                            <button type="submit" 
-                                    class="inline-flex items-center px-3 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-md transition duration-200 shadow hover:shadow-md"
-                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                <i class="fas fa-trash mr-2"></i>Hapus
-                            </button>
-                        </form>
+                        @if (Auth::user()->role === 'admin') <!-- Cek apakah pengguna adalah admin -->
+                    <form action="{{ route('transaksi.destroy', $transaksi->id) }}" method="POST" class="inline">
+                        @csrf @method('DELETE')
+                        <button type="submit" 
+                                class="inline-flex items-center px-3 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-md transition duration-200 shadow hover:shadow-md"
+                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                            <i class="fas fa-trash mr-2"></i>Hapus
+                        </button>
+                    </form>
+                    @endif
                         
                     </div>
                 </td>

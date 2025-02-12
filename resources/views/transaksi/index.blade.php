@@ -57,6 +57,7 @@
                        class="inline-flex items-center px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-medium rounded-md transition duration-200 shadow hover:shadow-md">
                         <i class="fas fa-edit mr-2"></i>Edit
                     </a>
+                    @if (Auth::user()->role === 'admin')
                     <form action="{{ route('transaksi.destroy', $transaksi->id) }}" method="POST" class="inline">
                         @csrf @method('DELETE')
                         <button type="submit" 
@@ -65,6 +66,7 @@
                             <i class="fas fa-trash mr-2"></i>Hapus
                         </button>
                     </form>
+                    @endif
                 </div>
             </div>
         </div>

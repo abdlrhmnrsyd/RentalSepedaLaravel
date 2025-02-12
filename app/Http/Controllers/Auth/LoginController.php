@@ -27,6 +27,13 @@ class LoginController extends Controller
             'password' => $credentials['password']
         ])) {
             $request->session()->regenerate();
+
+            
+            $user = Auth::user();
+            if ($user->role === 'admin') {
+                return redirect()->intended('admin/dashboard');
+            }
+
             return redirect()->intended('dashboard');
         }
 
