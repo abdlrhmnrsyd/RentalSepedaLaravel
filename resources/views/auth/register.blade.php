@@ -13,7 +13,7 @@
     <div class="container max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Register</h2>
         
-        <form action="{{ route('register') }}" method="POST" class="space-y-6">
+        <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
             
             <div class="space-y-2">
@@ -61,6 +61,18 @@
                        name="password_confirmation" 
                        required
                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div class="space-y-2">
+                <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
+                <input type="file" 
+                       id="photo" 
+                       name="photo" 
+                       required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                @error('photo')
+                    <div class="text-red-500 text-sm">{{ $message }}</div>
+                @enderror
             </div>
 
             <button type="submit" 

@@ -75,6 +75,13 @@
                         </div>
                         <span class="font-medium text-sm">Transaksi</span>
                     </a>
+                    <a class="nav-link-hover text-white hover:text-pink-200 transition duration-300 flex items-center space-x-2 px-3 py-1" 
+                       href="{{ route('profile') }}">
+                        <div class="glass-effect p-1.5 rounded-lg">
+                            <img src="{{ Auth::user()->photo ? asset('storage/' . Auth::user()->photo) : 'default-profile.png' }}" alt="Profile" class="w-6 h-6 rounded-full">
+                        </div>
+                        <span class="font-medium text-sm">Profile</span>
+                    </a>
                     <form action="{{ route('logout')}}" method="POST" class="inline">
                         @csrf
                         @method('POST')
@@ -122,6 +129,13 @@
                             <i class="fas fa-receipt text-sm"></i>
                         </div>
                         <span class="text-sm">Transaksi</span>
+                    </a>
+                    <a class="block text-white hover:bg-white/10 px-3 py-2 rounded-lg transition duration-300 flex items-center space-x-2" 
+                       href="{{ route('profile') }}">
+                        <div class="glass-effect p-1.5 rounded-lg">
+                            <img src="{{ Auth::user()->photo ? asset('storage/' . Auth::user()->photo) : 'default-profile.png' }}" alt="Profile" class="w-6 h-6 rounded-full">
+                        </div>
+                        <span class="text-sm">Profile</span>
                     </a>
                     <form action="{{ route('logout')}}" method="POST">
                         @csrf 

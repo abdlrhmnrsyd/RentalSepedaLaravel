@@ -20,12 +20,16 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'photo' => ['required', 'image', 'max:2048'],
         ]);
+
+        $path = $request->file('photo')->store('photos', 'public');
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'photo' => $path,
         ]);
 
         // Auth::login($user);
