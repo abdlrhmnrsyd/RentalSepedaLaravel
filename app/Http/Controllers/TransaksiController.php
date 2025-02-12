@@ -66,7 +66,7 @@ class TransaksiController extends Controller
 
     public function update(Request $request, Transaksi $transaksi)
     {
-        // Validasi input
+        
         $request->validate([
             'peminjam_id' => 'required|exists:peminjams,id',
             'sepeda_id' => 'required|exists:sepedas,id',
@@ -78,18 +78,16 @@ class TransaksiController extends Controller
             'status' => 'required|in:Pinjam,Kembali',
         ]);
 
-        // Ambil data sepeda berdasarkan id yang dipilih
+       
         $sepeda = Sepeda::find($request->sepeda_id);
-
-        // Hitung total bayar berdasarkan harga sewa sepeda dan jumlah hari sewa
         $tgl_pinjam = Carbon::parse($request->tgl_pinjam);
         $tgl_pulang = Carbon::parse($request->tgl_pulang);
         $durasi_sewa = $tgl_pinjam->diffInDays($tgl_pulang);
 
-        // Total bayar = harga sewa per hari * durasi sewa
+    
         $bayar = $sepeda->sewa * $durasi_sewa;
 
-        // Update transaksi dengan data yang sudah divalidasi
+        
         $transaksi->update([
             'peminjam_id' => $request->peminjam_id,
             'sepeda_id' => $request->sepeda_id,
