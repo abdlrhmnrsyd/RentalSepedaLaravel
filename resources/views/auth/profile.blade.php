@@ -17,6 +17,7 @@
         <div class="text-center">
             <p class="text-gray-800 text-lg font-semibold mb-2">Name: <span class="text-gray-600">{{ $user->name }}</span></p>
             <p class="text-gray-800 text-lg font-semibold mb-2">Email: <span class="text-gray-600">{{ $user->email }}</span></p>
+            <p class="text-gray-800 text-lg font-semibold mb-2">Address: <span class="text-gray-600">{{ $user->address }}</span></p>
             <p class="text-gray-800 text-lg font-semibold mb-2">Created At: <span class="text-gray-600">{{ $user->created_at }}</span></p>
             <p class="text-gray-800 text-lg font-semibold mb-2">Updated At: <span class="text-gray-600">{{ $user->updated_at }}</span></p>
         </div>

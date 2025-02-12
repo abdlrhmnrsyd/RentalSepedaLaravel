@@ -75,6 +75,19 @@
                 @enderror
             </div>
 
+            <div class="space-y-2">
+                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                <input type="text" 
+                       id="address" 
+                       name="address" 
+                       value="{{ old('address') }}" 
+                       required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                @error('address')
+                    <div class="text-red-500 text-sm">{{ $message }}</div>
+                @enderror
+            </div>
+
             <button type="submit" 
                     class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-300">
                 Register
