@@ -36,7 +36,7 @@
                             <i class="fas fa-edit mr-2"></i>Edit
                         </a>
 
-                        @if (Auth::user()->role === 'admin') <!-- Cek apakah pengguna adalah admin -->
+                        @if (Auth::user()->role === 'admin')
                     <form action="{{ route('sepeda.destroy', $sepeda->id) }}" method="POST" class="inline">
                         @csrf @method('DELETE')
                         <button type="submit" 
