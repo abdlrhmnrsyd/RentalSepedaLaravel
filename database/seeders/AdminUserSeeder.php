@@ -19,6 +19,7 @@ class AdminUserSeeder extends Seeder
             'password' => bcrypt('admin123'),
             'role' => 'admin',
             'photo' => 'img/admin-icon-vector.jpg',
+            'address' => 'admin',
         ]);
     }
 }

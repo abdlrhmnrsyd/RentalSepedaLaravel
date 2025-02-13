@@ -26,5 +26,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [LoginController::class, 'showProfile'])->name('profile');
     Route::post('/profile', [LoginController::class, 'updateProfile']);
     Route::get('/profile/edit', [LoginController::class, 'showEditProfile'])->name('profile.edit');
-    // Route::get('sepeda', [SepedaController::class, 'index'])->name('sepeda.index');
+    Route::get('sepeda', [SepedaController::class, 'index'])->name('sepeda.index');
 });
