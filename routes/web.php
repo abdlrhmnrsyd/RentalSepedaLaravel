@@ -6,6 +6,7 @@ use App\Http\Controllers\SepedaController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Admin\DashboardController;
 
 
 Route::middleware('guest')->group(function () {
@@ -27,4 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile', [LoginController::class, 'updateProfile']);
     Route::get('/profile/edit', [LoginController::class, 'showEditProfile'])->name('profile.edit');
     Route::get('sepeda', [SepedaController::class, 'index'])->name('sepeda.index');
+});
+
+Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->group(function () {
+    Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
 });

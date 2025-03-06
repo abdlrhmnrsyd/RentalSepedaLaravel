@@ -54,6 +54,15 @@
                 </div>
                 
                 <div class="hidden lg:flex items-center space-x-6">
+                    @if(Auth::user()->role === 'admin')
+                    <a class="nav-link-hover text-white hover:text-pink-200 transition duration-300 flex items-center space-x-2 px-3 py-1" 
+                       href="{{ route('admin.dashboard') }}">
+                        <div class="glass-effect p-1.5 rounded-lg">
+                            <i class="fas fa-chart-line text-sm"></i>
+                        </div>
+                        <span class="font-medium text-sm">Dashboard</span>
+                    </a>
+                    @endif
                     <a class="nav-link-hover text-white hover:text-pink-200 transition duration-300 flex items-center space-x-2 px-3 py-1" 
                        href="{{ route('peminjam.index') }}">
                         <div class="glass-effect p-1.5 rounded-lg">
@@ -109,6 +118,15 @@
                  x-transition:leave-start="opacity-100 transform translate-y-0"
                  x-transition:leave-end="opacity-0 transform -translate-y-4">
                 <div class="py-3 space-y-2">
+                    @if(Auth::user()->role === 'admin')
+                    <a class="block text-white hover:bg-white/10 px-3 py-2 rounded-lg transition duration-300 flex items-center space-x-2" 
+                       href="{{ route('admin.dashboard') }}">
+                        <div class="glass-effect p-1.5 rounded-lg">
+                            <i class="fas fa-chart-line text-sm"></i>
+                        </div>
+                        <span class="text-sm">Dashboard</span>
+                    </a>
+                    @endif
                     <a class="block text-white hover:bg-white/10 px-3 py-2 rounded-lg transition duration-300 flex items-center space-x-2" 
                        href="{{ route('peminjam.index') }}">
                         <div class="glass-effect p-1.5 rounded-lg">
