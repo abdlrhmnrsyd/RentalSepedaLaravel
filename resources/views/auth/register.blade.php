@@ -9,96 +9,90 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
     <title>register</title>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="container max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
-        <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Register</h2>
-        
-        <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
-            @csrf
+<body>
+    <div class="bg-white dark:bg-gray-900">
+        <div class="flex justify-center h-screen">
+            <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
+                <div class="flex-1">
+                    <div class="text-center">
+                        <div class="flex justify-center mx-auto">
+                            <i class="fas fa-bicycle text-5xl text-blue-600 mb-4"></i>
+                        </div>
+
+                        <p class="mt-3 text-gray-500 dark:text-gray-300">Daftar akun baru</p>
+                    </div>
+
+                    <div class="mt-8">
+                        <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div>
+                                <label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Nama</label>
+                                <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Nama lengkap Anda" class="block w-full px-3 py-1.5 mt-1 text-sm text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" required />
+                                @error('name')
+                                    <div class="text-red-500 text-xs mt-1"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mt-3">
+                                <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email</label>
+                                <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="contoh@email.com" class="block w-full px-3 py-1.5 mt-1 text-sm text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" required />
+                                @error('email')
+                                    <div class="text-red-500 text-xs mt-1"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mt-3">
+                                <label for="password" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Password</label>
+                                <input type="password" name="password" id="password" placeholder="Password Anda" class="block w-full px-3 py-1.5 mt-1 text-sm text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" required />
+                                @error('password')
+                                    <div class="text-red-500 text-xs mt-1"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mt-3">
+                                <label for="password_confirmation" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Konfirmasi Password</label>
+                                <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Ulangi password Anda" class="block w-full px-3 py-1.5 mt-1 text-sm text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" required />
+                            </div>
+
+                            <div class="mt-3">
+                                <label for="photo" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Foto</label>
+                                <input type="file" name="photo" id="photo" class="block w-full px-3 py-1.5 mt-1 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" required />
+                                @error('photo')
+                                    <div class="text-red-500 text-xs mt-1"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mt-3">
+                                <label for="address" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Alamat</label>
+                                <input type="text" name="address" id="address" value="{{ old('address') }}" placeholder="Alamat lengkap Anda" class="block w-full px-3 py-1.5 mt-1 text-sm text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" required />
+                                @error('address')
+                                    <div class="text-red-500 text-xs mt-1"><i class="fas fa-exclamation-circle mr-1"></i>{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mt-6">
+                                <button type="submit" class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                                    Daftar
+                                </button>
+                            </div>
+                        </form>
+
+                        <p class="mt-6 text-sm text-center text-gray-400">Sudah punya akun? <a href="{{ route('login') }}" class="text-blue-500 focus:outline-none focus:underline hover:underline">Masuk disini</a>.</p>
+                    </div>
+                </div>
+            </div>
             
-            <div class="space-y-2">
-                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" 
-                       id="name" 
-                       name="name" 
-                       value="{{ old('name') }}" 
-                       required
-                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                @error('name')
-                    <div class="text-red-500 text-sm">{{ $message }}</div>
-                @enderror
+            <div class="hidden bg-cover lg:block lg:w-2/3" style="background-image: url(https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80)">
+                <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white sm:text-3xl">Rental Sepeda Pantai</h2>
+
+                        <p class="max-w-xl mt-3 text-gray-300">
+                            Bergabunglah dengan kami dan nikmati pengalaman bersepeda di pantai yang menyenangkan. Kami menyediakan berbagai jenis sepeda berkualitas untuk Anda.
+                        </p>
+                    </div>
+                </div>
             </div>
-
-            <div class="space-y-2">
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" 
-                       id="email" 
-                       name="email" 
-                       value="{{ old('email') }}" 
-                       required
-                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                @error('email')
-                    <div class="text-red-500 text-sm">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="space-y-2">
-                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" 
-                       id="password" 
-                       name="password" 
-                       required
-                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                @error('password')
-                    <div class="text-red-500 text-sm">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="space-y-2">
-                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-                <input type="password" 
-                       id="password_confirmation" 
-                       name="password_confirmation" 
-                       required
-                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-
-            <div class="space-y-2">
-                <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
-                <input type="file" 
-                       id="photo" 
-                       name="photo" 
-                       required
-                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                @error('photo')
-                    <div class="text-red-500 text-sm">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="space-y-2">
-                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-                <input type="text" 
-                       id="address" 
-                       name="address" 
-                       value="{{ old('address') }}" 
-                       required
-                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                @error('address')
-                    <div class="text-red-500 text-sm">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <button type="submit" 
-                    class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-300">
-                Register
-            </button>
-        </form>
-
-        <div class="text-center mt-6 text-sm text-gray-600">
-            Already have an account? 
-            <a href="{{ route('login') }}" class="text-blue-600 hover:text-blue-800 font-medium">
-                Login here
-            </a>
         </div>
     </div>
 </body>
