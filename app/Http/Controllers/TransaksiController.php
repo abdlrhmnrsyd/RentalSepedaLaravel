@@ -27,19 +27,14 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'peminjam_id' => 'required|exists:peminjams,id',
             'sepeda_id' => 'required|exists:sepedas,id',
             'tgl_pinjam' => 'required|date',
             'tgl_pulang' => 'required|date|after_or_equal:tgl_pinjam',
             'bayar' => 'required|numeric|min:0',
+            'denda' => 'nullable|numeric|min:0',
             'jaminan' => 'required|string',
             'status' => 'required|in:Pinjam,Kembali',
-        ]);
-
-        // Buat peminjam baru dari data user yang login
-        $peminjam = Peminjam::create([
-            'nama' => auth()->user()->name,
-            'alamat' => auth()->user()->address,
-            'foto' => auth()->user()->photo,
         ]);
 
         $sepeda = Sepeda::find($request->sepeda_id);     
@@ -49,14 +44,14 @@ class TransaksiController extends Controller
         $bayar = $sepeda->sewa * $durasi_sewa;
 
         Transaksi::create([
-            'peminjam_id' => $peminjam->id,
+            'peminjam_id' => $request->peminjam_id,
             'sepeda_id' => $request->sepeda_id,
             'tgl_pinjam' => $request->tgl_pinjam,
             'tgl_pulang' => $request->tgl_pulang,
             'bayar' => $bayar,
-            'denda' => 0,
+            'denda' => $request->denda ?? 0,  
             'jaminan' => $request->jaminan,
-            'status' => 'Pinjam',
+            'status' => $request->status,
         ]);
 
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil ditambahkan.');
