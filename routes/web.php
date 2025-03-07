@@ -7,6 +7,7 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\RatingController;
 
 
 Route::middleware('guest')->group(function () {
@@ -33,3 +34,5 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->group(function () {
     Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
 });
+
+Route::post('/ratings', [RatingController::class, 'store'])->name('ratings.store')->middleware('auth');
