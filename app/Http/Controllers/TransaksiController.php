@@ -13,7 +13,15 @@ class TransaksiController extends Controller
 {
     public function index()
     {
-        $transaksis = Transaksi::with(['peminjam', 'sepeda'])->get();
+        // Ambil transaksi berdasarkan role user
+        if (auth()->user()->role === 'admin') {
+            $transaksis = Transaksi::with(['peminjam', 'sepeda'])->get();
+        } else {
+            $transaksis = Transaksi::with(['peminjam', 'sepeda'])
+                ->whereHas('peminjam', function($query) {
+                    $query->where('nama', auth()->user()->name);
+                })->get();
+        }
         return view('transaksi.index', compact('transaksis'));
     }
 
@@ -71,40 +79,16 @@ class TransaksiController extends Controller
 
     public function update(Request $request, Transaksi $transaksi)
     {
-        
         $request->validate([
-            'peminjam_id' => 'required|exists:peminjams,id',
-            'sepeda_id' => 'required|exists:sepedas,id',
-            'tgl_pinjam' => 'required|date',
-            'tgl_pulang' => 'required|date|after_or_equal:tgl_pinjam',
-            'bayar' => 'required|integer',
-            'denda' => 'nullable|integer',
-            'jaminan' => 'required|string',
             'status' => 'required|in:Pinjam,Kembali',
         ]);
 
-       
-        $sepeda = Sepeda::find($request->sepeda_id);
-        $tgl_pinjam = Carbon::parse($request->tgl_pinjam);
-        $tgl_pulang = Carbon::parse($request->tgl_pulang);
-        $durasi_sewa = $tgl_pinjam->diffInDays($tgl_pulang);
-
-    
-        $bayar = $sepeda->sewa * $durasi_sewa;
-
-        
+        // Hanya update status
         $transaksi->update([
-            'peminjam_id' => $request->peminjam_id,
-            'sepeda_id' => $request->sepeda_id,
-            'tgl_pinjam' => $request->tgl_pinjam,
-            'tgl_pulang' => $request->tgl_pulang,
-            'bayar' => $bayar,
-            'denda' => $request->denda ?? 0,
-            'jaminan' => $request->jaminan,
             'status' => $request->status,
         ]);
 
-        return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil diperbarui.');
+        return redirect()->route('transaksi.index')->with('success', 'Status transaksi berhasil diperbarui.');
     }
 
     public function destroy(Transaksi $transaksi)

@@ -2,9 +2,11 @@
 
 @section('content')
 <div class="container mx-auto p-6">
+    @if (Auth::user()->role === 'admin') 
     <a href="{{ route('transaksi.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5 px-5 rounded-full mb-6 inline-block transition duration-200 shadow-lg hover:shadow-xl">
         <i class="fas fa-plus mr-2"></i>Tambah Transaksi
     </a>
+    @endif
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach ($transaksis as $transaksi)

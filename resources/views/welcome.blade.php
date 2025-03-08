@@ -331,18 +331,18 @@
             
             <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto gsap-reveal">
                 @auth
-                    <!-- Tampilkan info user yang login -->
                     <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
+                        <div class="bg-blue-50 p-4 rounded-lg shadow-md transition-transform transform hover:scale-105">
                             <h3 class="text-lg font-semibold mb-4">Informasi Peminjam:</h3>
                             <div class="space-y-2">
                                 <p><span class="font-medium">Nama:</span> {{ Auth::user()->name }}</p>
+                                <p><span class="font-medium">Email:</span> {{ Auth::user()->email }}</p>
                                 <p><span class="font-medium">Alamat:</span> {{ Auth::user()->address }}</p>
                             </div>
                         </div>
                         <div class="flex justify-center items-center">
                             <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Foto Profil" 
-                                 class="w-32 h-32 object-cover rounded-full border-4 border-blue-500">
+                                 class="w-32 h-32 object-cover rounded-full border-4 border-blue-500 shadow-lg transition-transform transform hover:scale-110">
                         </div>
                     </div>
 
@@ -360,7 +360,7 @@
                                     </div>
                                     <div class="sepeda-wrapper">
                                         @foreach(App\Models\Sepeda::all() as $sepeda)
-                                        <div class="sepeda-card bg-white rounded-xl shadow-md overflow-hidden" 
+                                        <div class="sepeda-card bg-white rounded-xl shadow-md overflow-hidden transition-transform transform hover:scale-105" 
                                              data-id="{{ $sepeda->id }}"
                                              data-sewa="{{ $sepeda->sewa }}"
                                              data-foto="{{ asset('storage/' . $sepeda->foto) }}">
@@ -568,7 +568,7 @@
             <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
                 <p>&copy; 2023 Rental Sepeda Pantai. Hak Cipta Dilindungi.</p>
             </div>
-        </div>
+    </div>
     </footer>
 
     <script>
@@ -699,106 +699,6 @@
                 bayarDisplay.value = "Rp " + totalBayar.toLocaleString();
                 bayarInput.value = totalBayar;
             }
-
-            // Cursor Animation (ganti dengan kode baru)
-            const cursor = document.querySelector('.cursor');
-            const follower = document.querySelector('.cursor-follower');
-            
-            gsap.set([cursor, follower], {
-                xPercent: -50,
-                yPercent: -50
-            });
-            
-            window.addEventListener('mousemove', (e) => {
-                // Animasi untuk cursor utama (dot)
-                gsap.to(cursor, {
-                    x: e.clientX,
-                    y: e.clientY,
-                    duration: 0.1,
-                    ease: 'none'
-                });
-                
-                // Animasi untuk cursor follower dengan efek magnetic
-                gsap.to(follower, {
-                    x: e.clientX,
-                    y: e.clientY,
-                    duration: 0.5,
-                    ease: 'elastic.out(1, 0.3)'
-                });
-            });
-
-            // Efek hover yang lebih dinamis
-            const links = document.querySelectorAll('a, button');
-            links.forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    // Efek magnetic saat hover
-                    const rect = link.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    
-                    gsap.to(cursor, {
-                        scale: 2,
-                        duration: 0.3,
-                        backgroundColor: '#80D0C7'
-                    });
-                    
-                    gsap.to(follower, {
-                        x: centerX,
-                        y: centerY,
-                        scale: 1.5,
-                        borderColor: '#80D0C7',
-                        duration: 0.3,
-                        ease: 'power2.out'
-                    });
-                });
-                
-                link.addEventListener('mouseleave', () => {
-                    gsap.to(cursor, {
-                        scale: 1,
-                        duration: 0.3,
-                        backgroundColor: '#0093E9'
-                    });
-                    
-                    gsap.to(follower, {
-                        scale: 1,
-                        borderColor: '#0093E9',
-                        duration: 0.3
-                    });
-                });
-            });
-
-            // Efek klik
-            document.addEventListener('mousedown', () => {
-                gsap.to([cursor, follower], {
-                    scale: 0.8,
-                    duration: 0.1
-                });
-            });
-            
-            document.addEventListener('mouseup', () => {
-                gsap.to([cursor, follower], {
-                    scale: 1,
-                    duration: 0.1
-                });
-            });
-
-            // Hide cursor when leaving window
-            document.addEventListener('mouseleave', () => {
-                gsap.to([cursor, follower], {
-                    opacity: 0,
-                    duration: 0.3,
-                    ease: 'power2.out'
-                });
-            });
-
-            // Show cursor when entering window
-            document.addEventListener('mouseenter', () => {
-                gsap.to([cursor, follower], {
-                    opacity: 1,
-                    duration: 0.3,
-                    ease: 'power2.out'
-                });
-            });
 
             // Sepeda Slider functionality
             const sliderWrapper = document.querySelector('.sepeda-wrapper');
@@ -1012,7 +912,6 @@
         });
     </script>
     
-    <!-- GSAP ScrollTo Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
 </body>
 </html>
