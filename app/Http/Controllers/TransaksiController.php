@@ -83,7 +83,6 @@ class TransaksiController extends Controller
             'status' => 'required|in:Pinjam,Kembali',
         ]);
 
-        // Hanya update status
         $transaksi->update([
             'status' => $request->status,
         ]);

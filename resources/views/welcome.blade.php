@@ -214,7 +214,7 @@
     <div class="scroll-indicator" id="scrollIndicator"></div>
     
     <!-- Navbar -->
-    <nav class="bg-white shadow-md fixed w-full z-10">
+    <nav class="bg-white shadow-md fixed w-full z-10" x-data="{ isOpen: false }">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
@@ -223,35 +223,70 @@
                 </div>
                 
                 <div class="flex items-center space-x-4">
-                    @if (Route::has('login'))
-                        <div>
-                            @auth
-                                @if(Auth::user()->role === 'admin')
-                                    <a href="{{ url('/admin/dashboard') }}" class="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300">
-                                        <i class="fas fa-chart-line mr-1"></i> Dashboard
-                                    </a>
-                                @else
-                                    <a href="{{ route('profile') }}" class="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300">
-                                        <i class="fas fa-user mr-1"></i> Profil
-                                    </a>
-                                @endif
-                                <form method="POST" action="{{ route('logout') }}" class="inline-block ml-2">
-                                    @csrf
-                                    <button type="submit" class="px-4 py-2 rounded-md border border-red-500 text-red-500 hover:bg-red-50 transition-colors duration-300">
-                                        <i class="fas fa-sign-out-alt mr-1"></i> Keluar
-                                    </button>
-                                </form>
-                            @else
-                                <div class="flex space-x-2">
-                                    <a href="{{ route('login') }}" class="px-4 py-2 rounded-md border border-blue-600 text-blue-600 hover:bg-blue-50 transition-colors duration-300">Masuk</a>
-                                    @if (Route::has('register'))
-                                        <a href="{{ route('register') }}" class="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300">Daftar</a>
+                    <button @click="isOpen = !isOpen" class="lg:hidden p-2 rounded-md text-gray-600 hover:bg-gray-200 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="hidden lg:flex items-center space-x-4">
+                        @if (Route::has('login'))
+                            <div>
+                                @auth
+                                    @if(Auth::user()->role === 'admin')
+                                        <a href="{{ url('/admin/dashboard') }}" class="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300">
+                                            <i class="fas fa-chart-line mr-1"></i> Dashboard
+                                        </a>
+                                    @else
+                                        <a href="{{ route('profile') }}" class="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300">
+                                            <i class="fas fa-user mr-1"></i> Profil
+                                        </a>
                                     @endif
-                                </div>
-                            @endauth
-                        </div>
-                    @endif
+                                    <form method="POST" action="{{ route('logout') }}" class="inline-block ml-2">
+                                        @csrf
+                                        <button type="submit" class="px-4 py-2 rounded-md border border-red-500 text-red-500 hover:bg-red-50 transition-colors duration-300">
+                                            <i class="fas fa-sign-out-alt mr-1"></i> Keluar
+                                        </button>
+                                    </form>
+                                @else
+                                    <div class="flex space-x-2">
+                                        <a href="{{ route('login') }}" class="px-4 py-2 rounded-md border border-blue-600 text-blue-600 hover:bg-blue-50 transition-colors duration-300">Masuk</a>
+                                        @if (Route::has('register'))
+                                            <a href="{{ route('register') }}" class="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300">Daftar</a>
+                                        @endif
+                                    </div>
+                                @endauth
+                            </div>
+                        @endif
+                    </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div x-show="isOpen" class="lg:hidden bg-white shadow-md">
+            <div class="flex flex-col p-4">
+                @if (Route::has('login'))
+                    <div>
+                        @auth
+                            @if(Auth::user()->role === 'admin')
+                                <a href="{{ url('/admin/dashboard') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-200">Dashboard</a>
+                            @else
+                                <a href="{{ route('profile') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-200">Profil</a>
+                            @endif
+                            <form method="POST" action="{{ route('logout') }}" class="inline-block">
+                                @csrf
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-200">
+                                    Keluar
+                                </button>
+                            </form>
+                        @else
+                            <div class="flex flex-col space-y-2">
+                                <a href="{{ route('login') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-200">Masuk</a>
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-200">Daftar</a>
+                                @endif
+                            </div>
+                        @endauth
+                    </div>
+                @endif
             </div>
         </div>
     </nav>
