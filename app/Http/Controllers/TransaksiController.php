@@ -56,7 +56,7 @@ class TransaksiController extends Controller
         $durasi_sewa = $tgl_pinjam->diffInDays($tgl_pulang);
         $bayar = $sepeda->sewa * $durasi_sewa;
 
-        Transaksi::create([
+        $transaksi = Transaksi::create([
             'peminjam_id' => $peminjam->id,
             'sepeda_id' => $request->sepeda_id,
             'tgl_pinjam' => $request->tgl_pinjam,
@@ -67,7 +67,18 @@ class TransaksiController extends Controller
             'status' => 'Pinjam',
         ]);
 
-        return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil ditambahkan.');
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Yeay! Sepeda berhasil dirental. Selamat menikmati perjalanan Anda! 🚲',
+                'transaksi_id' => $transaksi->id
+            ]);
+        }
+
+        return redirect('/')->with('success_rental', [
+            'message' => 'Yeay! Sepeda berhasil dirental. Selamat menikmati perjalanan Anda! 🚲',
+            'transaksi_id' => $transaksi->id
+        ]);
     }
 
     public function edit(Transaksi $transaksi)

@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::get('transaksi/{id}', [TransaksiController::class, 'show'])->name('transaksi.show');
     Route::get('/', function () {
         return view('welcome');
-    });
+    })->name('welcome');
     Route::get('/profile', [LoginController::class, 'showProfile'])->name('profile');
     Route::post('/profile', [LoginController::class, 'updateProfile']);
     Route::get('/profile/edit', [LoginController::class, 'showEditProfile'])->name('profile.edit');

@@ -10,6 +10,9 @@
     <!-- GSAP Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         html {
             scroll-behavior: smooth;
@@ -203,6 +206,444 @@
             filter: blur(8px);
             transition: all 0.5s ease;
         }
+
+        /* Tambahkan style untuk alert kustom */
+        .swal2-popup {
+            padding: 2rem;
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            animation: checkmark 0.5s ease-in-out forwards;
+        }
+
+        @keyframes checkmark {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .rental-success-animation {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rental-success-animation::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.8),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 1.5s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+
+        .loading-animation {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .bike-animation {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .bike-animation::before {
+            content: '🚲';
+            font-size: 60px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            animation: bikeRide 2s ease-in-out forwards;
+        }
+
+        .loading-circle {
+            width: 200px;
+            height: 200px;
+            border: 4px solid #e2e8f0;
+            border-top-color: #3b82f6;
+            border-radius: 50%;
+            animation: loadingSpin 1s linear infinite;
+        }
+
+        @keyframes loadingSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes bikeRide {
+            0% {
+                transform: translate(-150%, -50%) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(150%, -50%) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .success-ripple {
+            position: fixed;
+            inset: 0;
+            background: #3b82f6;
+            transform: scale(0);
+            z-index: 9998;
+        }
+
+        .bike-ride-animation {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .bike-path {
+            position: relative;
+            width: 100%;
+            height: 100px;
+        }
+
+        .bike-emoji {
+            position: absolute;
+            font-size: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bike-trail {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, transparent);
+            transform-origin: left;
+        }
+
+        .success-flash {
+            position: fixed;
+            inset: 0;
+            background: #3b82f6;
+            opacity: 0;
+            z-index: 9998;
+        }
+
+        .bike-animation-container {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .bike-scene {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bike-emoji {
+            font-size: 4rem;
+            position: absolute;
+            left: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+        }
+
+        .bike-trail {
+            position: absolute;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                rgba(59, 130, 246, 0.8), 
+                rgba(59, 130, 246, 0.4), 
+                transparent);
+            width: 100px;
+            top: calc(50% + 30px);
+            left: -100px;
+            filter: blur(2px);
+        }
+
+        .sparkles {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0;
+            color: #3b82f6;
+        }
+
+        .success-ripple {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #3b82f6, #60a5fa);
+            transform: scale(0);
+            z-index: 9998;
+        }
+
+        .modern-loading {
+            position: fixed;
+            inset: 0;
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .loading-content {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .bike-container {
+            width: 100%;
+            height: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bike-wrapper {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            left: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .bike-emoji {
+            font-size: 3rem;
+            margin-right: 10px;
+        }
+
+        .bike-wheel {
+            width: 10px;
+            height: 2px;
+            background: #3b82f6;
+            position: absolute;
+            bottom: -5px;
+            opacity: 0.6;
+        }
+
+        .bike-path {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+            transform-origin: left;
+        }
+
+        .loading-text {
+            color: #3b82f6;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .loading-progress {
+            width: 200px;
+            height: 3px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 999px;
+            margin-top: 1rem;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #3b82f6;
+            width: 0%;
+            border-radius: 999px;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        .modern-loading {
+            position: fixed;
+            inset: 0;
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .loading-content {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .bike-scene {
+            width: 100%;
+            height: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bike-wrapper {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            left: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .bike-emoji {
+            font-size: 3.5rem;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        .bike-particles {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #3b82f6;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .bike-path {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent,
+                rgba(59, 130, 246, 0.3),
+                rgba(59, 130, 246, 0.5),
+                rgba(59, 130, 246, 0.3),
+                transparent
+            );
+        }
+
+        .loading-text {
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #3b82f6;
+            opacity: 0;
+            transform: translateY(20px);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-container {
+            margin-top: 1.5rem;
+            width: 240px;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 999px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            border-radius: 999px;
+            position: relative;
+        }
+
+        .progress-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent,
+                rgba(59, 130, 246, 0.6),
+                transparent
+            );
+            filter: blur(4px);
+            transform: translateX(-100%);
+        }
+
+        .progress-text {
+            position: absolute;
+            right: 0;
+            top: -20px;
+            font-size: 0.875rem;
+            color: #3b82f6;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
     </style>
 </head>
 <body class="font-sans antialiased text-gray-900 bg-gray-100">
@@ -381,7 +822,7 @@
                         </div>
                     </div>
 
-                    <form action="{{ route('transaksi.store') }}" method="POST" class="space-y-6">
+                    <form action="{{ route('transaksi.store') }}" method="POST" class="space-y-6" data-rental-form>
                         @csrf
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="col-span-1 md:col-span-2">
@@ -605,6 +1046,29 @@
             </div>
     </div>
     </footer>
+
+    @if(session('success_rental'))
+    <div id="success-alert" class="fixed inset-0 flex items-center justify-center z-50" style="background-color: rgba(0,0,0,0.5);">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full mx-4">
+            <div class="text-center">
+                <div class="mb-4">
+                                <i class="fas fa-check-circle text-5xl text-green-500"></i>
+                            </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Transaksi Berhasil!</h3>
+                <p class="text-gray-600 mb-6">{{ session('success_rental')['message'] }}</p>
+                <div class="flex flex-col space-y-3">
+                    <a href="{{ route('transaksi.index') }}" class="inline-flex justify-center items-center px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors">
+                        <i class="fas fa-eye mr-2"></i>
+                        Lihat Transaksi
+                    </a>
+                    <button onclick="closeAlert()" class="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -944,6 +1408,148 @@
             // Initialize slider
             window.addEventListener('resize', updateSliderPosition);
             updateSliderPosition(); // Call once at start
+        });
+
+        function closeAlert() {
+            const alert = document.getElementById('success-alert');
+            if (alert) {
+                gsap.to(alert, {
+                    opacity: 0,
+                    duration: 0.3,
+                    onComplete: () => alert.remove()
+                });
+            }
+        }
+
+        // Tambahkan event listener untuk AJAX form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const rentalForm = document.querySelector('form[action*="transaksi"]');
+            if (rentalForm) {
+                rentalForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const currentScroll = window.pageYOffset;
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Memproses...';
+
+                    try {
+                        const loadingContainer = document.createElement('div');
+                        loadingContainer.className = 'modern-loading';
+                        loadingContainer.innerHTML = `
+                            <div class="loading-content">
+                                <div class="loading-bike">🚲</div>
+                                <div class="loading-text">Memproses Transaksi...</div>
+                                <div class="loading-progress">
+                                    <div class="progress-bar"></div>
+                                </div>
+                            </div>
+                        `;
+                        document.body.appendChild(loadingContainer);
+
+                        // Animasi modern dengan GSAP
+                        const tl = gsap.timeline({
+                            onComplete: () => {
+                                gsap.to(loadingContainer, {
+                                    duration: 0.5,
+                                    opacity: 0,
+                                    onComplete: () => {
+                                        loadingContainer.remove();
+                                        
+                                        // Tampilkan SweetAlert
+                                        Swal.fire({
+                                            title: 'Transaksi Berhasil!',
+                                            text: data.message,
+                                            icon: 'success',
+                                            showCancelButton: true,
+                                            confirmButtonText: 'Lihat Transaksi',
+                                            cancelButtonText: 'Tutup',
+                                            allowOutsideClick: false,
+                                            background: 'rgba(255, 255, 255, 0.95)',
+                                            backdrop: `
+                                                rgba(0,0,123,0.4)
+                                                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cstyle%3E.spinner_V8m1%7Btransform-origin:center;animation:spinner_zKoa 2s linear infinite%7D.spinner_V8m1 circle%7Bstroke-linecap:round;animation:spinner_YpZS 1.5s ease-in-out infinite%7D%40keyframes spinner_zKoa%7B100%25%7Btransform:rotate(360deg)%7D%7D%40keyframes spinner_YpZS%7B0%25%7Bstroke-dasharray:0 150;stroke-dashoffset:0%7D47.5%25%7Bstroke-dasharray:42 150;stroke-dashoffset:-16%7D95%25%2C100%25%7Bstroke-dasharray:42 150;stroke-dashoffset:-59%7D%7D%3C%2Fstyle%3E%3Cg class='spinner_V8m1'%3E%3Ccircle cx='12' cy='12' r='9.5' fill='none' stroke='%23fff' stroke-width='3'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")
+                                                center center no-repeat
+                                            `
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                window.location.href = '/transaksi';
+                                            }
+                                        });
+
+                                        // Trigger confetti
+                                        confetti({
+                                            particleCount: 100,
+                                            spread: 70,
+                                            origin: { y: 0.6 }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+
+                        // Animasi elemen loading
+                        tl.to(loadingContainer, {
+                            duration: 0.3,
+                            opacity: 1
+                        })
+                        .to(loadingContainer.querySelector('.loading-bike'), {
+                            duration: 0.5,
+                            opacity: 1,
+                            y: 0,
+                            ease: "back.out(1.7)"
+                        })
+                        .to(loadingContainer.querySelector('.loading-text'), {
+                            duration: 0.5,
+                            opacity: 1,
+                            y: 0,
+                            ease: "back.out(1.7)"
+                        }, "-=0.3")
+                        .to(loadingContainer.querySelector('.loading-progress'), {
+                            duration: 0.5,
+                            opacity: 1,
+                            y: 0,
+                            ease: "back.out(1.7)"
+                        }, "-=0.3")
+                        .to(loadingContainer.querySelector('.progress-bar'), {
+                            duration: 1.5,
+                            width: "100%",
+                            ease: "power1.inOut"
+                        });
+
+                        // Kirim form dengan fetch
+                        const formData = new FormData(this);
+                        const response = await fetch(this.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        });
+                        
+                        const data = await response.json();
+
+                        if (data.success) {
+                            this.reset();
+                            window.scrollTo({
+                                top: currentScroll,
+                                behavior: 'instant'
+                            });
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Terjadi kesalahan. Silakan coba lagi.',
+                            icon: 'error'
+                        });
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                    }
+                });
+            }
         });
     </script>
     
