@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">Dashboard Admin</h1>
-    
+
     <!-- Info Cards -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
         <!-- Total Users Card -->
@@ -88,8 +88,9 @@
                         <th class="px-4 py-2 text-left">ID</th>
                         <th class="px-4 py-2 text-left">Merk</th>
                         <th class="px-4 py-2 text-left">Status</th>
-                        <th class="px-4 py-2 text-left">Tgl Pinjam</th>
-                        <th class="px-4 py-2 text-left">Tgl Kembali</th>
+                        <th class="px-4 py-2 text-left">Peminjam</th>
+                        <th class="px-4 py-2 text-left">Tanggal Pinjam</th>
+                        <th class="px-4 py-2 text-left">Tanggal Kembali</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -98,6 +99,7 @@
                         <td class="px-4 py-2">{{ $transaction->id }}</td>
                         <td class="px-4 py-2">{{ $transaction->sepeda->merk }}</td>
                         <td class="px-4 py-2">{{ $transaction->status }}</td>
+                        <td class="px-4 py-2">{{ $transaction->peminjam->nama }}</td>
                         <td class="px-4 py-2">{{ $transaction->tgl_pinjam }}</td>
                         <td class="px-4 py-2">{{ $transaction->tgl_pulang }}</td>
                     </tr>

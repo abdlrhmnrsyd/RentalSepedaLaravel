@@ -17,24 +17,24 @@
         html {
             scroll-behavior: smooth;
         }
-        
+
         .hero-pattern {
             background-color: #0093E9;
             background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
         }
-        
+
         .glass-card {
             background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.18);
         }
-        
+
         .gsap-reveal {
             opacity: 0;
             visibility: hidden;
         }
-        
+
         .scroll-indicator {
             position: fixed;
             top: 0;
@@ -45,7 +45,7 @@
             transform-origin: 0%;
             z-index: 1000;
         }
-        
+
         .cursor {
             width: 12px;
             height: 12px;
@@ -56,7 +56,7 @@
             mix-blend-mode: difference;
             z-index: 9999;
         }
-        
+
         .cursor-follower {
             width: 30px;
             height: 30px;
@@ -75,14 +75,14 @@
             border-radius: 10px;
             background: rgba(0, 147, 233, 0.1);
         }
-        
+
         .sepeda-slider {
             overflow-x: hidden;
             position: relative;
             padding: 40px 0;
             margin: 0 -20px;
         }
-        
+
         .sepeda-wrapper {
             display: flex;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -90,10 +90,10 @@
             padding: 10px 20px;
             align-items: center;
         }
-        
+
         .sepeda-card {
-            min-width: 280px;
-            height: 360px;
+            min-width: 260px;
+            height: 320px;
             flex-shrink: 0;
             cursor: pointer;
             transform: scale(0.85);
@@ -105,39 +105,39 @@
             border-radius: 0.75rem;
             overflow: hidden;
         }
-        
+
         .sepeda-card.active {
-            min-width: 320px;
+            min-width: 280px;
             transform: scale(1);
             border-color: #0093E9;
             box-shadow: 0 20px 25px -5px rgba(0, 147, 233, 0.2), 0 10px 10px -5px rgba(0, 147, 233, 0.1);
             opacity: 1;
             z-index: 2;
         }
-        
+
         .sepeda-card:not(.active) {
             filter: grayscale(30%);
             border: 3px solid #e5e7eb;
         }
-        
+
         .sepeda-card:hover:not(.active) {
             border-color: #80D0C7;
             opacity: 0.9;
             filter: grayscale(0%);
         }
-        
+
         .sepeda-card .sepeda-info {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(4px);
             border-top: 1px solid rgba(0, 147, 233, 0.1);
             transition: all 0.3s ease;
         }
-        
+
         .sepeda-card.active .sepeda-info {
             background: rgba(255, 255, 255, 1);
             box-shadow: 0 -4px 6px -1px rgba(0, 147, 233, 0.1);
         }
-        
+
         .slider-nav {
             position: absolute;
             top: 50%;
@@ -156,20 +156,20 @@
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
             font-size: 1.2rem;
         }
-        
+
         .slider-nav:hover {
             background: #80D0C7;
             transform: translateY(-50%) scale(1.1);
         }
-        
+
         .slider-prev {
             left: 20px;
         }
-        
+
         .slider-next {
             right: 20px;
         }
-        
+
         .sepeda-status {
             position: absolute;
             top: 10px;
@@ -180,17 +180,17 @@
             font-weight: 600;
             z-index: 1;
         }
-        
+
         .status-available {
             background-color: #10B981;
             color: white;
         }
-        
+
         .status-rented {
             background-color: #EF4444;
             color: white;
         }
-        
+
         /* Tambahkan efek glow untuk card aktif */
         .sepeda-card.active::after {
             content: '';
@@ -399,9 +399,9 @@
         .bike-trail {
             position: absolute;
             height: 4px;
-            background: linear-gradient(90deg, 
-                rgba(59, 130, 246, 0.8), 
-                rgba(59, 130, 246, 0.4), 
+            background: linear-gradient(90deg,
+                rgba(59, 130, 246, 0.8),
+                rgba(59, 130, 246, 0.4),
                 transparent);
             width: 100px;
             top: calc(50% + 30px);
@@ -575,7 +575,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, 
+            background: linear-gradient(90deg,
                 transparent,
                 rgba(59, 130, 246, 0.3),
                 rgba(59, 130, 246, 0.5),
@@ -622,7 +622,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
+            background: linear-gradient(90deg,
                 transparent,
                 rgba(59, 130, 246, 0.6),
                 transparent
@@ -644,16 +644,90 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-5px); }
         }
+
+        .info-card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .info-card-hover:hover {
+            transform: translateY(-2px);
+        }
+
+        .profile-photo-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-photo-container::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(45deg, #3b82f6, #60a5fa);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .profile-photo-container:hover::after {
+            opacity: 1;
+        }
+
+        .verification-badge {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .sepeda-card img {
+            height: 160px;
+            object-fit: cover;
+        }
+
+        /* Tambahkan media query untuk perangkat mobile */
+        @media (max-width: 640px) {
+            .sepeda-card {
+                min-width: 220px;
+                height: 280px;
+            }
+
+            .sepeda-card.active {
+                min-width: 240px;
+            }
+
+            .sepeda-card img {
+                height: 140px;
+            }
+
+            .sepeda-card .p-4 {
+                padding: 0.75rem;
+            }
+
+            .sepeda-card h3 {
+                font-size: 1rem;
+            }
+
+            .sepeda-card p {
+                font-size: 0.875rem;
+            }
+        }
     </style>
 </head>
 <body class="font-sans antialiased text-gray-900 bg-gray-100">
     <!-- Cursor Elements -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
-    
+
     <!-- Scroll Progress Indicator -->
     <div class="scroll-indicator" id="scrollIndicator"></div>
-    
+
     <!-- Navbar -->
     <nav class="bg-white shadow-md fixed w-full z-10" x-data="{ isOpen: false }">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -662,7 +736,7 @@
                     <i class="fas fa-bicycle text-3xl text-blue-600 mr-2"></i>
                     <span class="font-bold text-xl text-blue-600">Rental Sepeda Pantai</span>
                 </div>
-                
+
                 <div class="flex items-center space-x-4">
                     <button @click="isOpen = !isOpen" class="lg:hidden p-2 rounded-md text-gray-600 hover:bg-gray-200 focus:outline-none">
                         <i class="fas fa-bars"></i>
@@ -760,7 +834,7 @@
                     Kami menyediakan layanan rental sepeda pantai terbaik dengan berbagai keunggulan
                 </p>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-blue-50 p-8 rounded-xl shadow-md gsap-reveal">
                     <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
@@ -771,7 +845,7 @@
                         Kami hanya menyediakan sepeda berkualitas tinggi yang terawat dengan baik untuk kenyamanan Anda.
                     </p>
                 </div>
-                
+
                 <div class="bg-blue-50 p-8 rounded-xl shadow-md gsap-reveal">
                     <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fas fa-map-marker-alt text-2xl text-blue-600"></i>
@@ -781,7 +855,7 @@
                         Lokasi rental kami berada di dekat pantai dengan akses mudah ke berbagai tempat wisata menarik.
                     </p>
                 </div>
-                
+
                 <div class="bg-blue-50 p-8 rounded-xl shadow-md gsap-reveal">
                     <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fas fa-tag text-2xl text-blue-600"></i>
@@ -804,21 +878,77 @@
                     Isi form di bawah ini untuk langsung meminjam sepeda favorit Anda
                 </p>
             </div>
-            
+
             <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto gsap-reveal">
                 @auth
-                    <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-blue-50 p-4 rounded-lg shadow-md transition-transform transform hover:scale-105">
-                            <h3 class="text-lg font-semibold mb-4">Informasi Peminjam:</h3>
-                            <div class="space-y-2">
-                                <p><span class="font-medium">Nama:</span> {{ Auth::user()->name }}</p>
-                                <p><span class="font-medium">Email:</span> {{ Auth::user()->email }}</p>
-                                <p><span class="font-medium">Alamat:</span> {{ Auth::user()->address }}</p>
+                    <div class="mb-6">
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-5 shadow-lg border border-blue-200 max-w-3xl mx-auto">
+                            <h3 class="text-lg font-semibold text-blue-800 mb-3 flex items-center">
+                                <i class="fas fa-user-circle mr-2"></i>
+                                Informasi Peminjam
+                            </h3>
+
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                <!-- Profile Photo Section -->
+                                <div class="flex justify-center items-center">
+                                    <div class="relative group">
+                                        <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-300"></div>
+                                        <div class="relative">
+                                            <img src="{{ asset('storage/' . Auth::user()->photo) }}"
+                                                 alt="Foto Profil"
+                                                 class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg transform group-hover:scale-105 transition duration-300"
+                                            >
+                                            <div class="absolute bottom-0 right-0 bg-blue-500 text-white p-1.5 rounded-full shadow-lg">
+                                                <i class="fas fa-bicycle text-xs"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- User Details Section -->
+                                <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-3">
+                                    <!-- Name -->
+                                    <div class="flex items-center p-2.5 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                            <i class="fas fa-user text-blue-500 text-sm"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-xs text-gray-500">Nama</p>
+                                            <p class="text-sm font-medium text-gray-800">{{ Auth::user()->name }}</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="flex items-center p-2.5 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                            <i class="fas fa-envelope text-blue-500 text-sm"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-xs text-gray-500">Email</p>
+                                            <p class="text-sm font-medium text-gray-800">{{ Auth::user()->email }}</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Address -->
+                                    <div class="flex items-center p-2.5 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                            <i class="fas fa-map-marker-alt text-blue-500 text-sm"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-xs text-gray-500">Alamat</p>
+                                            <p class="text-sm font-medium text-gray-800">{{ Auth::user()->address }}</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex justify-center items-center">
-                            <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Foto Profil" 
-                                 class="w-32 h-32 object-cover rounded-full border-4 border-blue-500 shadow-lg transition-transform transform hover:scale-110">
+
+                            <!-- Status Badge -->
+                            <div class="mt-3 flex justify-end">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
+                                    Terverifikasi
+                                </span>
+                            </div>
                         </div>
                     </div>
 
@@ -836,12 +966,12 @@
                                     </div>
                                     <div class="sepeda-wrapper">
                                         @foreach(App\Models\Sepeda::all() as $sepeda)
-                                        <div class="sepeda-card bg-white rounded-xl shadow-md overflow-hidden transition-transform transform hover:scale-105" 
+                                        <div class="sepeda-card bg-white rounded-xl shadow-md overflow-hidden transition-transform transform hover:scale-105"
                                              data-id="{{ $sepeda->id }}"
                                              data-sewa="{{ $sepeda->sewa }}"
                                              data-foto="{{ asset('storage/' . $sepeda->foto) }}">
-                                            <img src="{{ asset('storage/' . $sepeda->foto) }}" 
-                                                 alt="{{ $sepeda->merk }}" 
+                                            <img src="{{ asset('storage/' . $sepeda->foto) }}"
+                                                 alt="{{ $sepeda->merk }}"
                                                  class="w-full h-48 object-cover">
                                             <div class="p-4">
                                                 <h3 class="font-semibold text-lg mb-2">{{ $sepeda->merk }}</h3>
@@ -855,17 +985,17 @@
                                 </div>
                                 <input type="hidden" name="sepeda_id" id="sepeda_id" required>
                             </div>
-                            
+
                             <div>
                                 <label for="tgl_pinjam" class="block text-sm font-medium text-gray-700 mb-2">Tanggal Pinjam</label>
                                 <input type="date" id="tgl_pinjam" name="tgl_pinjam" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required min="{{ date('Y-m-d') }}">
                             </div>
-                            
+
                             <div>
                                 <label for="tgl_pulang" class="block text-sm font-medium text-gray-700 mb-2">Tanggal Kembali</label>
                                 <input type="date" id="tgl_pulang" name="tgl_pulang" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required min="{{ date('Y-m-d', strtotime('+1 day')) }}">
                             </div>
-                            
+
                             <div>
                                 <label for="jaminan" class="block text-sm font-medium text-gray-700 mb-2">Jaminan</label>
                                 <select id="jaminan" name="jaminan" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
@@ -875,7 +1005,7 @@
                                     <option value="Kartu Keluarga">Kartu Keluarga</option>
                                 </select>
                             </div>
-                            
+
                             <div>
                                 <label for="bayar" class="block text-sm font-medium text-gray-700 mb-2">Total Biaya</label>
                                 <input type="text" id="bayar_display" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100" readonly>
@@ -883,7 +1013,7 @@
                                 <input type="hidden" name="status" value="Pinjam">
                             </div>
                         </div>
-                        
+
                         <div class="text-center pt-4">
                             <button type="submit" class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-300">
                                 Pinjam Sekarang
@@ -918,7 +1048,7 @@
                     Berbagai jenis sepeda yang dapat Anda sewa untuk menikmati liburan di pantai
                 </p>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach(App\Models\Sepeda::all() as $sepeda)
                 <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 gsap-reveal">
@@ -959,7 +1089,7 @@
                         <label class="block text-sm font-medium text-gray-700 mb-2">Rating</label>
                         <div class="flex space-x-2" x-data="{ rating: 0 }">
                             @for ($i = 1; $i <= 5; $i++)
-                            <button type="button" 
+                            <button type="button"
                                     class="text-2xl focus:outline-none"
                                     x-on:click="rating = {{ $i }}"
                                     x-on:mouseover="$el.classList.add('text-yellow-400')"
@@ -974,12 +1104,12 @@
 
                     <div>
                         <label for="comment" class="block text-sm font-medium text-gray-700 mb-2">Komentar</label>
-                        <textarea id="comment" name="comment" rows="3" 
+                        <textarea id="comment" name="comment" rows="3"
                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                                   required></textarea>
                     </div>
 
-                    <button type="submit" 
+                    <button type="submit"
                             class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
                         Kirim Ulasan
                     </button>
@@ -993,8 +1123,8 @@
                 <div class="bg-white p-8 rounded-xl shadow-md gsap-reveal">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 overflow-hidden rounded-full mr-4">
-                            <img src="{{ asset('storage/' . $testimonial->user->photo) }}" 
-                                 alt="{{ $testimonial->user->name }}" 
+                            <img src="{{ asset('storage/' . $testimonial->user->photo) }}"
+                                 alt="{{ $testimonial->user->name }}"
                                  class="w-full h-full object-cover">
                         </div>
                         <div>
@@ -1035,12 +1165,12 @@
                         Nikmati pengalaman bersepeda di pantai yang menyenangkan dengan sepeda berkualitas.
                     </p>
                 </div>
-                
+
                 <div class="text-gray-400 text-sm">
                     <p>abdulrahmanrasyid</p>
                 </div>
             </div>
-            
+
             <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
                 <p>&copy; 2023 Rental Sepeda Pantai. Hak Cipta Dilindungi.</p>
             </div>
@@ -1074,12 +1204,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize GSAP ScrollTrigger
             gsap.registerPlugin(ScrollTrigger);
-            
+
             // Scroll Progress Indicator
             gsap.to('#scrollIndicator', {
                 scaleX: 1,
                 ease: 'none',
-                scrollTrigger: { 
+                scrollTrigger: {
                     trigger: 'body',
                     scrub: 0.3,
                     start: 'top top',
@@ -1087,14 +1217,14 @@
                     invalidateOnRefresh: true
                 }
             });
-            
+
             // Reveal animations for sections
             gsap.utils.toArray('.gsap-reveal').forEach(function(elem) {
-                gsap.set(elem, { 
+                gsap.set(elem, {
                     autoAlpha: 0,
                     y: 50
                 });
-                
+
                 ScrollTrigger.create({
                     trigger: elem,
                     start: 'top 80%',
@@ -1113,20 +1243,20 @@
                     once: true
                 });
             });
-            
+
             // Smooth scroll for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
+
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
-                    
+
                     if (targetElement) {
                         const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
                         const startPosition = window.pageYOffset;
                         const distance = targetPosition - startPosition;
-                        
+
                         gsap.to(window, {
                             duration: 1,
                             scrollTo: {
@@ -1138,7 +1268,7 @@
                     }
                 });
             });
-            
+
             // Peminjaman sepeda functionality
             const sepedaSelect = document.getElementById('sepeda_id');
             const sepedaPreview = document.getElementById('sepeda_preview');
@@ -1146,13 +1276,13 @@
             const tglPulang = document.getElementById('tgl_pulang');
             const bayarDisplay = document.getElementById('bayar_display');
             const bayarInput = document.getElementById('bayar');
-            
+
             // Set initial preview image
             if (sepedaSelect && sepedaPreview) {
                 updateSepedaPreview();
                 calculateTotal();
             }
-            
+
             // Update preview when sepeda selection changes
             if (sepedaSelect) {
                 sepedaSelect.addEventListener('change', function() {
@@ -1160,40 +1290,40 @@
                     calculateTotal();
                 });
             }
-            
+
             // Calculate total when dates change
             if (tglPinjam) {
                 tglPinjam.addEventListener('change', calculateTotal);
             }
-            
+
             if (tglPulang) {
                 tglPulang.addEventListener('change', calculateTotal);
             }
-            
+
             function updateSepedaPreview() {
                 const selectedOption = sepedaSelect.options[sepedaSelect.selectedIndex];
                 const fotoUrl = selectedOption.getAttribute('data-foto');
                 sepedaPreview.src = fotoUrl;
             }
-            
+
             function calculateTotal() {
                 if (!tglPinjam.value || !tglPulang.value) return;
-                
+
                 const selectedOption = sepedaSelect.options[sepedaSelect.selectedIndex];
                 const sewaPerHari = parseInt(selectedOption.getAttribute('data-sewa'));
-                
+
                 const startDate = new Date(tglPinjam.value);
                 const endDate = new Date(tglPulang.value);
-                
+
                 // Calculate days difference
                 const diffTime = Math.abs(endDate - startDate);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                
+
                 if (diffDays <= 0) {
                     bayarDisplay.value = "Tanggal tidak valid";
                     return;
                 }
-                
+
                 const totalBayar = sewaPerHari * diffDays;
                 bayarDisplay.value = "Rp " + totalBayar.toLocaleString();
                 bayarInput.value = totalBayar;
@@ -1218,7 +1348,7 @@
             cards.forEach((card, index) => {
                 card.addEventListener('click', () => {
                     if (index === currentIndex) return;
-                    
+
                     // Remove active class from all cards
                     cards.forEach(c => c.classList.remove('active'));
                     // Add active class to clicked card
@@ -1226,13 +1356,13 @@
                     // Update selected sepeda
                     sepedaIdInput.value = card.dataset.id;
                     calculateTotal();
-                    
+
                     // Animate to center
                     currentIndex = index;
                     updateSliderPosition();
-                    
+
                     // Tambahkan efek highlight untuk card yang dipilih
-                    gsap.fromTo(card, 
+                    gsap.fromTo(card,
                         {
                             scale: 1.05,
                             borderColor: "#80D0C7"
@@ -1286,14 +1416,14 @@
                 const containerWidth = sliderWrapper.parentElement.offsetWidth;
                 const centerOffset = (containerWidth - cardWidth) / 2;
                 const offset = -currentIndex * cardWidth + centerOffset;
-                
+
                 // Animasi dengan GSAP
                 gsap.to(sliderWrapper, {
                     x: offset,
                     duration: 0.5,
                     ease: "power2.out"
                 });
-                
+
                 // Update tampilan card
                 cards.forEach((card, index) => {
                     if (index === currentIndex) {
@@ -1310,7 +1440,7 @@
                         const distance = Math.abs(index - currentIndex);
                         const scale = Math.max(0.85, 1 - (distance * 0.1));
                         const opacity = Math.max(0.7, 1 - (distance * 0.2));
-                        
+
                         gsap.to(card, {
                             scale: scale,
                             opacity: opacity,
@@ -1335,21 +1465,21 @@
             // Update the existing calculateTotal function
             function calculateTotal() {
                 if (!tglPinjam.value || !tglPulang.value) return;
-                
+
                 const activeCard = document.querySelector('.sepeda-card.active');
                 const sewaPerHari = parseInt(activeCard.dataset.sewa);
-                
+
                 const startDate = new Date(tglPinjam.value);
                 const endDate = new Date(tglPulang.value);
-                
+
                 const diffTime = Math.abs(endDate - startDate);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                
+
                 if (diffDays <= 0) {
                     bayarDisplay.value = "Tanggal tidak valid";
                     return;
                 }
-                
+
                 const totalBayar = sewaPerHari * diffDays;
                 bayarDisplay.value = "Rp " + totalBayar.toLocaleString();
                 bayarInput.value = totalBayar;
@@ -1370,7 +1500,7 @@
                     startPos = e.clientX;
                     sliderWrapper.style.cursor = 'grabbing';
                 }
-                
+
                 isDragging = true;
                 animationID = requestAnimationFrame(animation);
             }
@@ -1385,9 +1515,9 @@
                 isDragging = false;
                 cancelAnimationFrame(animationID);
                 sliderWrapper.style.cursor = 'grab';
-                
+
                 const movedBy = currentTranslate - prevTranslate;
-                
+
                 // If moved enough negative
                 if (movedBy < -100 && currentIndex < cards.length - 1) {
                     currentIndex += 1;
@@ -1396,12 +1526,12 @@
                 if (movedBy > 100 && currentIndex > 0) {
                     currentIndex -= 1;
                 }
-                
+
                 cards.forEach(c => c.classList.remove('active'));
                 cards[currentIndex].classList.add('active');
                 sepedaIdInput.value = cards[currentIndex].dataset.id;
                 calculateTotal();
-                
+
                 updateSliderPosition();
             }
 
@@ -1427,7 +1557,7 @@
             if (rentalForm) {
                 rentalForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
-                    
+
                     const currentScroll = window.pageYOffset;
                     const submitBtn = this.querySelector('button[type="submit"]');
                     const originalText = submitBtn.innerHTML;
@@ -1456,7 +1586,7 @@
                                     opacity: 0,
                                     onComplete: () => {
                                         loadingContainer.remove();
-                                        
+
                                         // Tampilkan SweetAlert
                                         Swal.fire({
                                             title: 'Transaksi Berhasil!',
@@ -1527,7 +1657,7 @@
                                 'X-Requested-With': 'XMLHttpRequest'
                             }
                         });
-                        
+
                         const data = await response.json();
 
                         if (data.success) {
@@ -1552,7 +1682,7 @@
             }
         });
     </script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
 </body>
 </html>

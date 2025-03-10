@@ -16,7 +16,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'login' => ['required', 'string'], 
+            'login' => ['required', 'string'],
             'password' => ['required'],
         ]);
 
@@ -28,12 +28,14 @@ class LoginController extends Controller
         ])) {
             $request->session()->regenerate();
 
-            
+            // Check user role and redirect accordingly
             $user = Auth::user();
             if ($user->role === 'admin') {
-                return redirect()->intended('admin/dashboard');
+                return redirect()->route('admin.dashboard');
             }
 
+            // If not admin, redirect to welcome page
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
