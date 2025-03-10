@@ -27,9 +27,14 @@ class TransaksiController extends Controller
 
     public function create()
     {
-        $peminjams = Peminjam::all();
         $sepedas = Sepeda::all();
-        return view('transaksi.create', compact('peminjams', 'sepedas'));
+
+        if (auth()->user()->role === 'admin') {
+            $peminjams = Peminjam::all();
+            return view('transaksi.create', compact('peminjams', 'sepedas'));
+        }
+
+        return view('transaksi.create', compact('sepedas'));
     }
 
     public function store(Request $request)
@@ -43,21 +48,32 @@ class TransaksiController extends Controller
             'status' => 'required|in:Pinjam,Kembali',
         ]);
 
-        // Buat peminjam baru dari data user yang login
-        $peminjam = Peminjam::create([
-            'nama' => auth()->user()->name,
-            'alamat' => auth()->user()->address,
-            'foto' => auth()->user()->photo,
-        ]);
+        if (auth()->user()->role === 'admin') {
+            // Jika admin, gunakan peminjam_id dari form
+            $request->validate([
+                'peminjam_id' => 'required|exists:peminjams,id'
+            ]);
+            $peminjam_id = $request->peminjam_id;
+        } else {
+            // Jika user biasa, buat peminjam baru dari data user yang login
+            $peminjam = Peminjam::firstOrCreate(
+                ['nama' => auth()->user()->name],
+                [
+                    'alamat' => auth()->user()->address,
+                    'foto' => auth()->user()->photo,
+                ]
+            );
+            $peminjam_id = $peminjam->id;
+        }
 
-        $sepeda = Sepeda::find($request->sepeda_id);     
+        $sepeda = Sepeda::find($request->sepeda_id);
         $tgl_pinjam = Carbon::parse($request->tgl_pinjam);
         $tgl_pulang = Carbon::parse($request->tgl_pulang);
         $durasi_sewa = $tgl_pinjam->diffInDays($tgl_pulang);
         $bayar = $sepeda->sewa * $durasi_sewa;
 
         $transaksi = Transaksi::create([
-            'peminjam_id' => $peminjam->id,
+            'peminjam_id' => $peminjam_id,
             'sepeda_id' => $request->sepeda_id,
             'tgl_pinjam' => $request->tgl_pinjam,
             'tgl_pulang' => $request->tgl_pulang,

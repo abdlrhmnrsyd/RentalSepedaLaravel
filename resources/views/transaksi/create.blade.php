@@ -7,20 +7,52 @@
     <form action="{{ route('transaksi.store') }}" method="POST" class="space-y-6 bg-white p-6 rounded-lg shadow-md">
         @csrf
 
-        <div class="mb-4">
-            <label for="peminjam_id" class="block text-sm font-medium text-gray-700">Peminjam</label>
-            <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50" id="peminjam_id" name="peminjam_id" required>
-                @foreach ($peminjams as $peminjam)
-                    <option value="{{ $peminjam->id }}">{{ $peminjam->nama }}</option>
-                @endforeach
-            </select>
+        @if(auth()->user()->role === 'admin')
+        <div class="mb-6">
+            <label for="peminjam_id" class="block text-sm font-medium text-gray-700 mb-2">Pilih Peminjam</label>
+            <div class="relative">
+                <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500 pl-3 pr-10 py-2"
+                        id="peminjam_id"
+                        name="peminjam_id"
+                        required>
+                    <option value="">-- Pilih Peminjam --</option>
+                    @foreach ($peminjams as $peminjam)
+                        <option value="{{ $peminjam->id }}"
+                                data-foto="{{ asset('storage/' . $peminjam->foto) }}"
+                                data-alamat="{{ $peminjam->alamat }}">
+                            {{ $peminjam->nama }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Preview info peminjam -->
+            <div id="peminjam_preview" class="hidden mt-4 p-4 bg-gray-50 rounded-lg">
+                <div class="flex items-center space-x-4">
+                    <img id="peminjam_foto" src="" alt="Foto Peminjam"
+                         class="w-16 h-16 rounded-full object-cover border-2 border-blue-500">
+                    <div>
+                        <h4 id="peminjam_nama" class="font-medium text-gray-900"></h4>
+                        <p id="peminjam_alamat" class="text-sm text-gray-500"></p>
+                    </div>
+                </div>
+            </div>
         </div>
+        @endif
 
         <div class="mb-4">
-            <label for="sepeda_id" class="block text-sm font-medium text-gray-700">Sepeda</label>
-            <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50" id="sepeda_id" name="sepeda_id" required>
+            <label for="sepeda_id" class="block text-sm font-medium text-gray-700 mb-2">Pilih Sepeda</label>
+            <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
+                    id="sepeda_id"
+                    name="sepeda_id"
+                    required>
+                <option value="">-- Pilih Sepeda --</option>
                 @foreach ($sepedas as $sepeda)
-                    <option value="{{ $sepeda->id }}" data-sewa="{{ $sepeda->sewa }}" data-gambar="{{ asset($sepeda->gambar) }}">{{ $sepeda->merk }}</option>
+                    <option value="{{ $sepeda->id }}"
+                            data-sewa="{{ $sepeda->sewa }}"
+                            data-gambar="{{ asset('storage/' . $sepeda->foto) }}">
+                        {{ $sepeda->merk }} - Rp {{ number_format($sepeda->sewa, 0, ',', '.') }}/hari
+                    </option>
                 @endforeach
             </select>
         </div>
@@ -46,11 +78,6 @@
         </div>
 
         <div class="mb-4">
-            <label for="denda" class="block text-sm font-medium text-gray-700">Denda</label>
-            <input type="number" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50" id="denda" name="denda">
-        </div>
-
-        <div class="mb-4">
             <label for="jaminan" class="block text-sm font-medium text-gray-700">Jaminan</label>
             <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50" id="jaminan" name="jaminan" required>
         </div>
@@ -68,6 +95,25 @@
 </div>
 
 <script>
+    @if(auth()->user()->role === 'admin')
+    document.getElementById('peminjam_id').addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        const preview = document.getElementById('peminjam_preview');
+        const foto = document.getElementById('peminjam_foto');
+        const nama = document.getElementById('peminjam_nama');
+        const alamat = document.getElementById('peminjam_alamat');
+
+        if (this.value) {
+            preview.classList.remove('hidden');
+            foto.src = selectedOption.dataset.foto;
+            nama.textContent = selectedOption.text;
+            alamat.textContent = selectedOption.dataset.alamat;
+        } else {
+            preview.classList.add('hidden');
+        }
+    });
+    @endif
+
     document.getElementById('sepeda_id').addEventListener('change', function() {
         var selectedOption = this.options[this.selectedIndex];
         var sewa = selectedOption.getAttribute('data-sewa');
@@ -75,15 +121,18 @@
         var tglPinjam = document.getElementById('tgl_pinjam').value;
         var tglPulang = document.getElementById('tgl_pulang').value;
 
-        if(tglPinjam && tglPulang) {
-            var diff = Math.abs(new Date(tglPulang) - new Date(tglPinjam));
-            var diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+        // Update gambar sepeda
+        var gambarSepeda = document.getElementById('gambar_sepeda');
+        if (gambar) {
+            gambarSepeda.src = gambar;
+            gambarSepeda.classList.remove('hidden');
+        }
 
-            var totalBayar = diffDays * sewa;
-            document.getElementById('bayar').value = totalBayar;
+        if(tglPinjam && tglPulang) {
+            calculateBayar();
         }
     });
-   
+
     document.getElementById('tgl_pinjam').addEventListener('change', function() {
         calculateBayar();
     });
@@ -99,7 +148,7 @@
 
         if(tglPinjam && tglPulang && sewa) {
             var diff = Math.abs(new Date(tglPulang) - new Date(tglPinjam));
-            var diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+            var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
 
             var totalBayar = diffDays * sewa;
             document.getElementById('bayar').value = totalBayar;
