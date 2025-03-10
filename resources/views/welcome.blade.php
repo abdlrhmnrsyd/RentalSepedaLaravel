@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,34 +7,24 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
-    <!-- GSAP Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
+        html { scroll-behavior: smooth; }
         .hero-pattern {
             background-color: #0093E9;
             background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
         }
-
         .glass-card {
             background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.18);
         }
-
-        .gsap-reveal {
-            opacity: 0;
-            visibility: hidden;
-        }
-
+        .gsap-reveal { opacity: 0; visibility: hidden; }
         .scroll-indicator {
             position: fixed;
             top: 0;
@@ -45,7 +35,6 @@
             transform-origin: 0%;
             z-index: 1000;
         }
-
         .cursor {
             width: 12px;
             height: 12px;
@@ -56,7 +45,6 @@
             mix-blend-mode: difference;
             z-index: 9999;
         }
-
         .cursor-follower {
             width: 30px;
             height: 30px;
@@ -67,22 +55,18 @@
             transition: transform 0.1s;
             z-index: 9998;
         }
-
-        /* Efek hover baru */
         a:hover ~ .cursor-follower,
         button:hover ~ .cursor-follower {
             transform: scale(1.5) rotate(45deg);
             border-radius: 10px;
             background: rgba(0, 147, 233, 0.1);
         }
-
         .sepeda-slider {
             overflow-x: hidden;
             position: relative;
             padding: 40px 0;
             margin: 0 -20px;
         }
-
         .sepeda-wrapper {
             display: flex;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -90,7 +74,6 @@
             padding: 10px 20px;
             align-items: center;
         }
-
         .sepeda-card {
             min-width: 260px;
             height: 320px;
@@ -105,7 +88,6 @@
             border-radius: 0.75rem;
             overflow: hidden;
         }
-
         .sepeda-card.active {
             min-width: 280px;
             transform: scale(1);
@@ -114,30 +96,25 @@
             opacity: 1;
             z-index: 2;
         }
-
         .sepeda-card:not(.active) {
             filter: grayscale(30%);
             border: 3px solid #e5e7eb;
         }
-
         .sepeda-card:hover:not(.active) {
             border-color: #80D0C7;
             opacity: 0.9;
             filter: grayscale(0%);
         }
-
         .sepeda-card .sepeda-info {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(4px);
             border-top: 1px solid rgba(0, 147, 233, 0.1);
             transition: all 0.3s ease;
         }
-
         .sepeda-card.active .sepeda-info {
             background: rgba(255, 255, 255, 1);
             box-shadow: 0 -4px 6px -1px rgba(0, 147, 233, 0.1);
         }
-
         .slider-nav {
             position: absolute;
             top: 50%;
@@ -156,20 +133,16 @@
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
             font-size: 1.2rem;
         }
-
         .slider-nav:hover {
             background: #80D0C7;
             transform: translateY(-50%) scale(1.1);
         }
-
         .slider-prev {
             left: 20px;
         }
-
         .slider-next {
             right: 20px;
         }
-
         .sepeda-status {
             position: absolute;
             top: 10px;
@@ -180,18 +153,14 @@
             font-weight: 600;
             z-index: 1;
         }
-
         .status-available {
             background-color: #10B981;
             color: white;
         }
-
         .status-rented {
             background-color: #EF4444;
             color: white;
         }
-
-        /* Tambahkan efek glow untuk card aktif */
         .sepeda-card.active::after {
             content: '';
             position: absolute;
@@ -206,8 +175,6 @@
             filter: blur(8px);
             transition: all 0.5s ease;
         }
-
-        /* Tambahkan style untuk alert kustom */
         .swal2-popup {
             padding: 2rem;
             border-radius: 1rem;
@@ -215,14 +182,12 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
-
         .success-checkmark {
             width: 80px;
             height: 80px;
             margin: 0 auto;
             animation: checkmark 0.5s ease-in-out forwards;
         }
-
         @keyframes checkmark {
             0% {
                 transform: scale(0);
@@ -234,12 +199,10 @@
                 transform: scale(1);
             }
         }
-
         .rental-success-animation {
             position: relative;
             overflow: hidden;
         }
-
         .rental-success-animation::after {
             content: '';
             position: absolute;
@@ -256,7 +219,6 @@
             transform: rotate(45deg);
             animation: shine 1.5s infinite;
         }
-
         @keyframes shine {
             0% {
                 transform: translateX(-100%) rotate(45deg);
@@ -265,7 +227,6 @@
                 transform: translateX(100%) rotate(45deg);
             }
         }
-
         .loading-animation {
             position: fixed;
             inset: 0;
@@ -275,13 +236,11 @@
             align-items: center;
             z-index: 9999;
         }
-
         .bike-animation {
             position: relative;
             width: 200px;
             height: 200px;
         }
-
         .bike-animation::before {
             content: '🚲';
             font-size: 60px;
@@ -291,7 +250,6 @@
             transform: translate(-50%, -50%);
             animation: bikeRide 2s ease-in-out forwards;
         }
-
         .loading-circle {
             width: 200px;
             height: 200px;
@@ -300,11 +258,9 @@
             border-radius: 50%;
             animation: loadingSpin 1s linear infinite;
         }
-
         @keyframes loadingSpin {
             to { transform: rotate(360deg); }
         }
-
         @keyframes bikeRide {
             0% {
                 transform: translate(-150%, -50%) rotate(0deg);
@@ -321,7 +277,6 @@
                 opacity: 0;
             }
         }
-
         .success-ripple {
             position: fixed;
             inset: 0;
@@ -329,7 +284,6 @@
             transform: scale(0);
             z-index: 9998;
         }
-
         .bike-ride-animation {
             position: fixed;
             inset: 0;
@@ -339,13 +293,11 @@
             align-items: center;
             z-index: 9999;
         }
-
         .bike-path {
             position: relative;
             width: 100%;
             height: 100px;
         }
-
         .bike-emoji {
             position: absolute;
             font-size: 3rem;
@@ -353,14 +305,12 @@
             align-items: center;
             gap: 8px;
         }
-
         .bike-trail {
             position: absolute;
             height: 2px;
             background: linear-gradient(90deg, #3b82f6, transparent);
             transform-origin: left;
         }
-
         .success-flash {
             position: fixed;
             inset: 0;
@@ -368,7 +318,6 @@
             opacity: 0;
             z-index: 9998;
         }
-
         .bike-animation-container {
             position: fixed;
             inset: 0;
@@ -378,14 +327,12 @@
             align-items: center;
             z-index: 9999;
         }
-
         .bike-scene {
             width: 100%;
             height: 200px;
             position: relative;
             overflow: hidden;
         }
-
         .bike-emoji {
             font-size: 4rem;
             position: absolute;
@@ -395,7 +342,6 @@
             display: flex;
             align-items: center;
         }
-
         .bike-trail {
             position: absolute;
             height: 4px;
@@ -408,14 +354,12 @@
             left: -100px;
             filter: blur(2px);
         }
-
         .sparkles {
             position: absolute;
             font-size: 1.5rem;
             opacity: 0;
             color: #3b82f6;
         }
-
         .success-ripple {
             position: fixed;
             inset: 0;
@@ -423,7 +367,6 @@
             transform: scale(0);
             z-index: 9998;
         }
-
         .modern-loading {
             position: fixed;
             inset: 0;
@@ -434,7 +377,6 @@
             z-index: 9999;
             background: rgba(255, 255, 255, 0.2);
         }
-
         .loading-content {
             position: relative;
             width: 100%;
@@ -444,14 +386,12 @@
             align-items: center;
             flex-direction: column;
         }
-
         .bike-container {
             width: 100%;
             height: 100px;
             position: relative;
             overflow: hidden;
         }
-
         .bike-wrapper {
             position: absolute;
             display: flex;
@@ -460,12 +400,10 @@
             top: 50%;
             transform: translateY(-50%);
         }
-
         .bike-emoji {
             font-size: 3rem;
             margin-right: 10px;
         }
-
         .bike-wheel {
             width: 10px;
             height: 2px;
@@ -474,7 +412,6 @@
             bottom: -5px;
             opacity: 0.6;
         }
-
         .bike-path {
             position: absolute;
             bottom: 40px;
@@ -484,7 +421,6 @@
             background: linear-gradient(90deg, transparent, #3b82f6, transparent);
             transform-origin: left;
         }
-
         .loading-text {
             color: #3b82f6;
             font-size: 1.2rem;
@@ -493,7 +429,6 @@
             opacity: 0;
             transform: translateY(20px);
         }
-
         .loading-progress {
             width: 200px;
             height: 3px;
@@ -504,7 +439,6 @@
             opacity: 0;
             transform: translateY(20px);
         }
-
         .progress-bar {
             height: 100%;
             background: #3b82f6;
@@ -512,7 +446,6 @@
             border-radius: 999px;
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
         }
-
         .modern-loading {
             position: fixed;
             inset: 0;
@@ -523,7 +456,6 @@
             z-index: 9999;
             background: rgba(255, 255, 255, 0.2);
         }
-
         .loading-content {
             position: relative;
             width: 100%;
@@ -533,14 +465,12 @@
             align-items: center;
             flex-direction: column;
         }
-
         .bike-scene {
             width: 100%;
             height: 120px;
             position: relative;
             overflow: hidden;
         }
-
         .bike-wrapper {
             position: absolute;
             display: flex;
@@ -549,17 +479,14 @@
             top: 50%;
             transform: translateY(-50%);
         }
-
         .bike-emoji {
             font-size: 3.5rem;
             filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
         }
-
         .bike-particles {
             position: absolute;
             pointer-events: none;
         }
-
         .particle {
             position: absolute;
             width: 6px;
@@ -568,7 +495,6 @@
             border-radius: 50%;
             opacity: 0;
         }
-
         .bike-path {
             position: absolute;
             bottom: 30px;
@@ -583,7 +509,6 @@
                 transparent
             );
         }
-
         .loading-text {
             margin-top: 2rem;
             font-size: 1.2rem;
@@ -593,13 +518,11 @@
             transform: translateY(20px);
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
         .progress-container {
             margin-top: 1.5rem;
             width: 240px;
             position: relative;
         }
-
         .progress-bar {
             height: 4px;
             background: rgba(59, 130, 246, 0.2);
@@ -607,7 +530,6 @@
             overflow: hidden;
             position: relative;
         }
-
         .progress-fill {
             height: 100%;
             width: 0%;
@@ -615,7 +537,6 @@
             border-radius: 999px;
             position: relative;
         }
-
         .progress-glow {
             position: absolute;
             top: 0;
@@ -630,7 +551,6 @@
             filter: blur(4px);
             transform: translateX(-100%);
         }
-
         .progress-text {
             position: absolute;
             right: 0;
@@ -639,25 +559,20 @@
             color: #3b82f6;
             opacity: 0;
         }
-
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-5px); }
         }
-
         .info-card-hover {
             transition: all 0.3s ease;
         }
-
         .info-card-hover:hover {
             transform: translateY(-2px);
         }
-
         .profile-photo-container {
             position: relative;
             display: inline-block;
         }
-
         .profile-photo-container::after {
             content: '';
             position: absolute;
@@ -671,49 +586,38 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-
         .profile-photo-container:hover::after {
             opacity: 1;
         }
-
         .verification-badge {
             animation: pulse 2s infinite;
         }
-
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
-
         .sepeda-card img {
             height: 160px;
             object-fit: cover;
         }
-
-        /* Tambahkan media query untuk perangkat mobile */
         @media (max-width: 640px) {
             .sepeda-card {
                 min-width: 220px;
                 height: 280px;
             }
-
             .sepeda-card.active {
                 min-width: 240px;
             }
-
             .sepeda-card img {
                 height: 140px;
             }
-
             .sepeda-card .p-4 {
                 padding: 0.75rem;
             }
-
             .sepeda-card h3 {
                 font-size: 1rem;
             }
-
             .sepeda-card p {
                 font-size: 0.875rem;
             }
@@ -721,14 +625,9 @@
     </style>
 </head>
 <body class="font-sans antialiased text-gray-900 bg-gray-100">
-    <!-- Cursor Elements -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
-
-    <!-- Scroll Progress Indicator -->
     <div class="scroll-indicator" id="scrollIndicator"></div>
-
-    <!-- Navbar -->
     <nav class="bg-white shadow-md fixed w-full z-10" x-data="{ isOpen: false }">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -736,7 +635,6 @@
                     <i class="fas fa-bicycle text-3xl text-blue-600 mr-2"></i>
                     <span class="font-bold text-xl text-blue-600">Rental Sepeda Pantai</span>
                 </div>
-
                 <div class="flex items-center space-x-4">
                     <button @click="isOpen = !isOpen" class="lg:hidden p-2 rounded-md text-gray-600 hover:bg-gray-200 focus:outline-none">
                         <i class="fas fa-bars"></i>
@@ -774,8 +672,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Mobile Menu -->
         <div x-show="isOpen" class="lg:hidden bg-white shadow-md">
             <div class="flex flex-col p-4">
                 @if (Route::has('login'))
@@ -805,8 +701,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- Hero Section -->
     <section class="hero-pattern pt-24 pb-16 md:pt-32 md:pb-24">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center">
@@ -824,8 +718,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Features Section -->
     <section class="py-16 bg-white" id="tentang">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 gsap-reveal">
@@ -834,7 +726,6 @@
                     Kami menyediakan layanan rental sepeda pantai terbaik dengan berbagai keunggulan
                 </p>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-blue-50 p-8 rounded-xl shadow-md gsap-reveal">
                     <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
@@ -845,7 +736,6 @@
                         Kami hanya menyediakan sepeda berkualitas tinggi yang terawat dengan baik untuk kenyamanan Anda.
                     </p>
                 </div>
-
                 <div class="bg-blue-50 p-8 rounded-xl shadow-md gsap-reveal">
                     <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fas fa-map-marker-alt text-2xl text-blue-600"></i>
@@ -855,7 +745,6 @@
                         Lokasi rental kami berada di dekat pantai dengan akses mudah ke berbagai tempat wisata menarik.
                     </p>
                 </div>
-
                 <div class="bg-blue-50 p-8 rounded-xl shadow-md gsap-reveal">
                     <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fas fa-tag text-2xl text-blue-600"></i>
@@ -868,8 +757,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Peminjaman Langsung Section -->
     <section class="py-16 bg-gray-100" id="pinjam-sekarang">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 gsap-reveal">
@@ -878,7 +765,6 @@
                     Isi form di bawah ini untuk langsung meminjam sepeda favorit Anda
                 </p>
             </div>
-
             <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto gsap-reveal">
                 @auth
                     <div class="mb-6">
@@ -887,9 +773,7 @@
                                 <i class="fas fa-user-circle mr-2"></i>
                                 Informasi Peminjam
                             </h3>
-
                             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                                <!-- Profile Photo Section -->
                                 <div class="flex justify-center items-center">
                                     <div class="relative group">
                                         <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-300"></div>
@@ -904,54 +788,42 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- User Details Section -->
                                 <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-3">
-                                    <!-- Name -->
                                     <div class="flex items-center p-2.5 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
                                         <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
                                             <i class="fas fa-user text-blue-500 text-sm"></i>
                                         </div>
-                                        <div class="ml-3">
+                                        <div class="ml-3 min-w-0">
                                             <p class="text-xs text-gray-500">Nama</p>
-                                            <p class="text-sm font-medium text-gray-800">{{ Auth::user()->name }}</p>
+                                            <p class="text-sm font-medium text-gray-800 truncate">{{ Auth::user()->name }}</p>
                                         </div>
                                     </div>
-
-                                    <!-- Email -->
                                     <div class="flex items-center p-2.5 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
                                         <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
                                             <i class="fas fa-envelope text-blue-500 text-sm"></i>
                                         </div>
-                                        <div class="ml-3">
+                                        <div class="ml-3 min-w-0 flex-1">
                                             <p class="text-xs text-gray-500">Email</p>
-                                            <p class="text-sm font-medium text-gray-800">{{ Auth::user()->email }}</p>
+                                            <p class="text-sm font-medium text-gray-800 truncate" title="{{ Auth::user()->email }}">
+                                                {{ Auth::user()->email }}
+                                            </p>
                                         </div>
                                     </div>
-
-                                    <!-- Address -->
                                     <div class="flex items-center p-2.5 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
                                         <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
                                             <i class="fas fa-map-marker-alt text-blue-500 text-sm"></i>
                                         </div>
-                                        <div class="ml-3">
+                                        <div class="ml-3 min-w-0">
                                             <p class="text-xs text-gray-500">Alamat</p>
-                                            <p class="text-sm font-medium text-gray-800">{{ Auth::user()->address }}</p>
+                                            <p class="text-sm font-medium text-gray-800 truncate" title="{{ Auth::user()->address }}">
+                                                {{ Auth::user()->address }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Status Badge -->
-                            <div class="mt-3 flex justify-end">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                    Terverifikasi
-                                </span>
-                            </div>
                         </div>
                     </div>
-
                     <form action="{{ route('transaksi.store') }}" method="POST" class="space-y-6" data-rental-form>
                         @csrf
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -985,17 +857,14 @@
                                 </div>
                                 <input type="hidden" name="sepeda_id" id="sepeda_id" required>
                             </div>
-
                             <div>
                                 <label for="tgl_pinjam" class="block text-sm font-medium text-gray-700 mb-2">Tanggal Pinjam</label>
                                 <input type="date" id="tgl_pinjam" name="tgl_pinjam" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required min="{{ date('Y-m-d') }}">
                             </div>
-
                             <div>
                                 <label for="tgl_pulang" class="block text-sm font-medium text-gray-700 mb-2">Tanggal Kembali</label>
                                 <input type="date" id="tgl_pulang" name="tgl_pulang" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required min="{{ date('Y-m-d', strtotime('+1 day')) }}">
                             </div>
-
                             <div>
                                 <label for="jaminan" class="block text-sm font-medium text-gray-700 mb-2">Jaminan</label>
                                 <select id="jaminan" name="jaminan" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
@@ -1005,7 +874,6 @@
                                     <option value="Kartu Keluarga">Kartu Keluarga</option>
                                 </select>
                             </div>
-
                             <div>
                                 <label for="bayar" class="block text-sm font-medium text-gray-700 mb-2">Total Biaya</label>
                                 <input type="text" id="bayar_display" class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100" readonly>
@@ -1013,7 +881,6 @@
                                 <input type="hidden" name="status" value="Pinjam">
                             </div>
                         </div>
-
                         <div class="text-center pt-4">
                             <button type="submit" class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-300">
                                 Pinjam Sekarang
@@ -1038,8 +905,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Bikes Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 gsap-reveal">
@@ -1048,7 +913,6 @@
                     Berbagai jenis sepeda yang dapat Anda sewa untuk menikmati liburan di pantai
                 </p>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach(App\Models\Sepeda::all() as $sepeda)
                 <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 gsap-reveal">
@@ -1068,8 +932,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Testimonials Section -->
     <section class="py-16 bg-gray-100">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 gsap-reveal">
@@ -1078,9 +940,7 @@
                     Pengalaman pelanggan kami yang telah menggunakan layanan rental sepeda pantai
                 </p>
             </div>
-
             @auth
-            <!-- Form Rating -->
             <div class="max-w-2xl mx-auto mb-12 bg-white p-6 rounded-lg shadow-md gsap-reveal">
                 <h3 class="text-xl font-semibold mb-4">Berikan Ulasan Anda</h3>
                 <form action="{{ route('ratings.store') }}" method="POST" class="space-y-4">
@@ -1101,14 +961,12 @@
                             <input type="hidden" name="rating" x-bind:value="rating">
                         </div>
                     </div>
-
                     <div>
                         <label for="comment" class="block text-sm font-medium text-gray-700 mb-2">Komentar</label>
                         <textarea id="comment" name="comment" rows="3"
                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                                   required></textarea>
                     </div>
-
                     <button type="submit"
                             class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
                         Kirim Ulasan
@@ -1116,8 +974,6 @@
                 </form>
             </div>
             @endauth
-
-            <!-- Daftar Testimonial -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @foreach(\App\Models\Rating::with('user')->latest()->take(6)->get() as $testimonial)
                 <div class="bg-white p-8 rounded-xl shadow-md gsap-reveal">
@@ -1151,8 +1007,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
@@ -1165,18 +1019,15 @@
                         Nikmati pengalaman bersepeda di pantai yang menyenangkan dengan sepeda berkualitas.
                     </p>
                 </div>
-
                 <div class="text-gray-400 text-sm">
                     <p>abdulrahmanrasyid</p>
                 </div>
             </div>
-
             <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
                 <p>&copy; 2023 Rental Sepeda Pantai. Hak Cipta Dilindungi.</p>
             </div>
-    </div>
+        </div>
     </footer>
-
     @if(session('success_rental'))
     <div id="success-alert" class="fixed inset-0 flex items-center justify-center z-50" style="background-color: rgba(0,0,0,0.5);">
         <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full mx-4">
@@ -1199,13 +1050,9 @@
         </div>
     </div>
     @endif
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize GSAP ScrollTrigger
             gsap.registerPlugin(ScrollTrigger);
-
-            // Scroll Progress Indicator
             gsap.to('#scrollIndicator', {
                 scaleX: 1,
                 ease: 'none',
@@ -1217,14 +1064,11 @@
                     invalidateOnRefresh: true
                 }
             });
-
-            // Reveal animations for sections
             gsap.utils.toArray('.gsap-reveal').forEach(function(elem) {
                 gsap.set(elem, {
                     autoAlpha: 0,
                     y: 50
                 });
-
                 ScrollTrigger.create({
                     trigger: elem,
                     start: 'top 80%',
@@ -1243,20 +1087,15 @@
                     once: true
                 });
             });
-
-            // Smooth scroll for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
-
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
-
                     if (targetElement) {
                         const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
                         const startPosition = window.pageYOffset;
                         const distance = targetPosition - startPosition;
-
                         gsap.to(window, {
                             duration: 1,
                             scrollTo: {
@@ -1268,100 +1107,69 @@
                     }
                 });
             });
-
-            // Peminjaman sepeda functionality
             const sepedaSelect = document.getElementById('sepeda_id');
             const sepedaPreview = document.getElementById('sepeda_preview');
             const tglPinjam = document.getElementById('tgl_pinjam');
             const tglPulang = document.getElementById('tgl_pulang');
             const bayarDisplay = document.getElementById('bayar_display');
             const bayarInput = document.getElementById('bayar');
-
-            // Set initial preview image
             if (sepedaSelect && sepedaPreview) {
                 updateSepedaPreview();
                 calculateTotal();
             }
-
-            // Update preview when sepeda selection changes
             if (sepedaSelect) {
                 sepedaSelect.addEventListener('change', function() {
                     updateSepedaPreview();
                     calculateTotal();
                 });
             }
-
-            // Calculate total when dates change
             if (tglPinjam) {
                 tglPinjam.addEventListener('change', calculateTotal);
             }
-
             if (tglPulang) {
                 tglPulang.addEventListener('change', calculateTotal);
             }
-
             function updateSepedaPreview() {
                 const selectedOption = sepedaSelect.options[sepedaSelect.selectedIndex];
                 const fotoUrl = selectedOption.getAttribute('data-foto');
                 sepedaPreview.src = fotoUrl;
             }
-
             function calculateTotal() {
                 if (!tglPinjam.value || !tglPulang.value) return;
-
                 const selectedOption = sepedaSelect.options[sepedaSelect.selectedIndex];
                 const sewaPerHari = parseInt(selectedOption.getAttribute('data-sewa'));
-
                 const startDate = new Date(tglPinjam.value);
                 const endDate = new Date(tglPulang.value);
-
-                // Calculate days difference
                 const diffTime = Math.abs(endDate - startDate);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
                 if (diffDays <= 0) {
                     bayarDisplay.value = "Tanggal tidak valid";
                     return;
                 }
-
                 const totalBayar = sewaPerHari * diffDays;
                 bayarDisplay.value = "Rp " + totalBayar.toLocaleString();
                 bayarInput.value = totalBayar;
             }
-
-            // Sepeda Slider functionality
             const sliderWrapper = document.querySelector('.sepeda-wrapper');
             const cards = document.querySelectorAll('.sepeda-card');
             const prevBtn = document.querySelector('.slider-prev');
             const nextBtn = document.querySelector('.slider-next');
             const sepedaIdInput = document.getElementById('sepeda_id');
             let currentIndex = 0;
-
-            // Initialize first card as active
             if (cards.length > 0) {
                 cards[0].classList.add('active');
                 sepedaIdInput.value = cards[0].dataset.id;
                 updateSepedaPreview(cards[0].dataset.foto);
             }
-
-            // Card click handler
             cards.forEach((card, index) => {
                 card.addEventListener('click', () => {
                     if (index === currentIndex) return;
-
-                    // Remove active class from all cards
                     cards.forEach(c => c.classList.remove('active'));
-                    // Add active class to clicked card
                     card.classList.add('active');
-                    // Update selected sepeda
                     sepedaIdInput.value = card.dataset.id;
                     calculateTotal();
-
-                    // Animate to center
                     currentIndex = index;
                     updateSliderPosition();
-
-                    // Tambahkan efek highlight untuk card yang dipilih
                     gsap.fromTo(card,
                         {
                             scale: 1.05,
@@ -1376,55 +1184,36 @@
                     );
                 });
             });
-
-            // Previous button handler
             prevBtn.addEventListener('click', () => {
                 if (currentIndex > 0) {
                     currentIndex--;
-                    // Hapus kelas active dari semua card
                     cards.forEach(c => c.classList.remove('active'));
-                    // Tambahkan kelas active ke card yang baru
                     cards[currentIndex].classList.add('active');
-                    // Update nilai input sepeda yang dipilih
                     sepedaIdInput.value = cards[currentIndex].dataset.id;
-                    // Hitung ulang total
                     calculateTotal();
-                    // Update posisi slider
                     updateSliderPosition();
                 }
             });
-
-            // Next button handler
             nextBtn.addEventListener('click', () => {
                 if (currentIndex < cards.length - 1) {
                     currentIndex++;
-                    // Hapus kelas active dari semua card
                     cards.forEach(c => c.classList.remove('active'));
-                    // Tambahkan kelas active ke card yang baru
                     cards[currentIndex].classList.add('active');
-                    // Update nilai input sepeda yang dipilih
                     sepedaIdInput.value = cards[currentIndex].dataset.id;
-                    // Hitung ulang total
                     calculateTotal();
-                    // Update posisi slider
                     updateSliderPosition();
                 }
             });
-
             function updateSliderPosition() {
                 const cardWidth = 320;
                 const containerWidth = sliderWrapper.parentElement.offsetWidth;
                 const centerOffset = (containerWidth - cardWidth) / 2;
                 const offset = -currentIndex * cardWidth + centerOffset;
-
-                // Animasi dengan GSAP
                 gsap.to(sliderWrapper, {
                     x: offset,
                     duration: 0.5,
                     ease: "power2.out"
                 });
-
-                // Update tampilan card
                 cards.forEach((card, index) => {
                     if (index === currentIndex) {
                         gsap.to(card, {
@@ -1440,7 +1229,6 @@
                         const distance = Math.abs(index - currentIndex);
                         const scale = Math.max(0.85, 1 - (distance * 0.1));
                         const opacity = Math.max(0.7, 1 - (distance * 0.2));
-
                         gsap.to(card, {
                             scale: scale,
                             opacity: opacity,
@@ -1453,46 +1241,34 @@
                     }
                 });
             }
-
-            // Update the existing updateSepedaPreview function
             function updateSepedaPreview(fotoUrl) {
                 const sepedaPreview = document.getElementById('sepeda_preview');
                 if (sepedaPreview) {
                     sepedaPreview.src = fotoUrl;
                 }
             }
-
-            // Update the existing calculateTotal function
             function calculateTotal() {
                 if (!tglPinjam.value || !tglPulang.value) return;
-
                 const activeCard = document.querySelector('.sepeda-card.active');
                 const sewaPerHari = parseInt(activeCard.dataset.sewa);
-
                 const startDate = new Date(tglPinjam.value);
                 const endDate = new Date(tglPulang.value);
-
                 const diffTime = Math.abs(endDate - startDate);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
                 if (diffDays <= 0) {
                     bayarDisplay.value = "Tanggal tidak valid";
                     return;
                 }
-
                 const totalBayar = sewaPerHari * diffDays;
                 bayarDisplay.value = "Rp " + totalBayar.toLocaleString();
                 bayarInput.value = totalBayar;
             }
-
-            // Touch and Drag functionality
             let isDragging = false;
             let startPos = 0;
             let currentTranslate = 0;
             let prevTranslate = 0;
             let animationID = 0;
             let currentDragIndex = currentIndex;
-
             function dragStart(e) {
                 if (e.type === 'touchstart') {
                     startPos = e.touches[0].clientX;
@@ -1500,46 +1276,34 @@
                     startPos = e.clientX;
                     sliderWrapper.style.cursor = 'grabbing';
                 }
-
                 isDragging = true;
                 animationID = requestAnimationFrame(animation);
             }
-
             function animation() {
                 if (isDragging) {
                     requestAnimationFrame(animation);
                 }
             }
-
             function dragEnd() {
                 isDragging = false;
                 cancelAnimationFrame(animationID);
                 sliderWrapper.style.cursor = 'grab';
-
                 const movedBy = currentTranslate - prevTranslate;
-
-                // If moved enough negative
                 if (movedBy < -100 && currentIndex < cards.length - 1) {
                     currentIndex += 1;
                 }
-                // If moved enough positive
                 if (movedBy > 100 && currentIndex > 0) {
                     currentIndex -= 1;
                 }
-
                 cards.forEach(c => c.classList.remove('active'));
                 cards[currentIndex].classList.add('active');
                 sepedaIdInput.value = cards[currentIndex].dataset.id;
                 calculateTotal();
-
                 updateSliderPosition();
             }
-
-            // Initialize slider
             window.addEventListener('resize', updateSliderPosition);
-            updateSliderPosition(); // Call once at start
+            updateSliderPosition();
         });
-
         function closeAlert() {
             const alert = document.getElementById('success-alert');
             if (alert) {
@@ -1550,20 +1314,16 @@
                 });
             }
         }
-
-        // Tambahkan event listener untuk AJAX form submission
         document.addEventListener('DOMContentLoaded', function() {
             const rentalForm = document.querySelector('form[action*="transaksi"]');
             if (rentalForm) {
                 rentalForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
-
                     const currentScroll = window.pageYOffset;
                     const submitBtn = this.querySelector('button[type="submit"]');
                     const originalText = submitBtn.innerHTML;
                     submitBtn.disabled = true;
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Memproses...';
-
                     try {
                         const loadingContainer = document.createElement('div');
                         loadingContainer.className = 'modern-loading';
@@ -1577,8 +1337,6 @@
                             </div>
                         `;
                         document.body.appendChild(loadingContainer);
-
-                        // Animasi modern dengan GSAP
                         const tl = gsap.timeline({
                             onComplete: () => {
                                 gsap.to(loadingContainer, {
@@ -1586,8 +1344,6 @@
                                     opacity: 0,
                                     onComplete: () => {
                                         loadingContainer.remove();
-
-                                        // Tampilkan SweetAlert
                                         Swal.fire({
                                             title: 'Transaksi Berhasil!',
                                             text: data.message,
@@ -1607,8 +1363,6 @@
                                                 window.location.href = '/transaksi';
                                             }
                                         });
-
-                                        // Trigger confetti
                                         confetti({
                                             particleCount: 100,
                                             spread: 70,
@@ -1618,8 +1372,6 @@
                                 });
                             }
                         });
-
-                        // Animasi elemen loading
                         tl.to(loadingContainer, {
                             duration: 0.3,
                             opacity: 1
@@ -1647,8 +1399,6 @@
                             width: "100%",
                             ease: "power1.inOut"
                         });
-
-                        // Kirim form dengan fetch
                         const formData = new FormData(this);
                         const response = await fetch(this.action, {
                             method: 'POST',
@@ -1657,9 +1407,7 @@
                                 'X-Requested-With': 'XMLHttpRequest'
                             }
                         });
-
                         const data = await response.json();
-
                         if (data.success) {
                             this.reset();
                             window.scrollTo({
@@ -1682,7 +1430,6 @@
             }
         });
     </script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
 </body>
 </html>
